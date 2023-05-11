@@ -1,4 +1,4 @@
-const propNames = new Set(['id', 'className', 'textContent', 'onclick']);
+const propNames = new Set(["id", "className", "textContent", "onclick"]);
 
 /**
  * Создание элемента со свойствами и вложенными элементами
@@ -25,4 +25,33 @@ export function createElement(name, props = {}, ...children) {
   }
 
   return element;
+}
+/**
+ * Create word to display with counter amount 
+ * @param {*} number {Number} counter amount
+ * @returns {String} word "раз" or "разa" 
+ */
+export function changeName(number) {
+  const text = ["раз", "раза"];
+  const n = number % 10;
+  if (n === 1 || n === 0) {
+    return text[0];
+  }
+  if (number === 1 || n >= 5) {
+    return text[0];
+  }
+  if (number === 12 || number === 13 || number == 14) {
+    return text[0];
+  }
+  if (n >= 2 && n <= 4) {
+    return text[1];
+  }
+}
+
+/**
+ * Create unique element's Id
+ * @returns {String} id of each element
+ */
+export function generateId() {
+  return Math.random().toString(36).substring(2) + new Date().getTime().toString(36);
 }
