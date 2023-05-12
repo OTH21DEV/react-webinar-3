@@ -27,9 +27,9 @@ export function createElement(name, props = {}, ...children) {
   return element;
 }
 /**
- * Create word to display with counter amount 
+ * Create word to display with counter amount
  * @param {*} number {Number} counter amount
- * @returns {String} word "раз" or "разa" 
+ * @returns {String} word "раз" or "разa"
  */
 export function changeName(number) {
   const text = ["раз", "раза"];

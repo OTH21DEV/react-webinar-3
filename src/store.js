@@ -46,7 +46,7 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {id: generateId(),code: this.state.list.length + 1, title: "Новая запись", counter: 0 ,selected:false}],
+      list: [...this.state.list, { id: generateId(), code: this.state.list.length + 1, title: "Новая запись", counter: 0, selected: false }],
     });
   }
 
@@ -67,7 +67,6 @@ class Store {
    */
 
   selectItem(code) {
-  
     this.setState({
       ...this.state,
       list: this.state.list.map((item) => {

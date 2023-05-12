@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { createElement } from "./utils.js";
+import React from "react";
 import "./styles.css";
 import Store from "./store.js";
-import {changeName} from "./utils.js"
+import { changeName } from "./utils.js";
 
 /**
  * Приложение
  * @param store {Store} Хранилище состояния приложения
  * @returns {React.ReactElement}
  */
-
-
 
 function App({ store }) {
   const list = store.getState().list;
@@ -36,8 +33,7 @@ function App({ store }) {
                 }}
               >
                 <div className="Item-code">{index + 1}</div>
-
-                <div className="Item-title">{item.selected && item.counter > 0 ? `${item.title}${"\u00A0"} | ${"\u00A0"}Выделяли ${item.counter} ${changeName(item.counter)}` : item.title}</div>
+                <div className="Item-title">{item.counter == 0 ? item.title : `${item.title}${"\u00A0"} | ${"\u00A0"}Выделяли ${item.counter} ${changeName(item.counter)}`}</div>
                 <div className="Item-actions">
                   <button onClick={() => store.deleteItem(item.code)}>Удалить</button>
                 </div>
