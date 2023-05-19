@@ -11,7 +11,6 @@ import PropTypes from "prop-types";
  * @param {Function} setModalShow set modal state
  * @returns {HTMLElement}
  */
-
 function Controls({ shoppingList, setModalShow }) {
   let total = calculateTotal(shoppingList);
   let locale;

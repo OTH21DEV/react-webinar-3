@@ -9,7 +9,6 @@ import "./style.css";
  * @param {Function} props.setModalShow set modal state
  * @returns {HTMLElement}
  */
-
 function Head({ title, modalShow, setModalShow }) {
   return (
     <div className="Head">

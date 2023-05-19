@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import List from "./components/list";
 import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
 import Modal from "./components/modal";
+
 /**
  * Приложение
  * @param store {Store} Хранилище состояния приложения
@@ -40,14 +41,25 @@ function App({ store }) {
 
   return (
     <>
-    <PageLayout>
-      <Head title="Mагазин" />
-      <Controls shoppingList={shoppingList} onAdd={callbacks.onAddItem} setModalShow={setModalShow} />
-      <List list={list} btnName={btnName[0]} onDeleteItem={callbacks.onAddItem} onSelectItem={callbacks.onSelectItem} setModalShow={setModalShow}/>
-    </PageLayout>
-      {modalShow ? <Modal title={"Корзина"} list={shoppingList} btnName={btnName[1]} onDeleteItem={callbacks.onDeleteItem} onSelectItem={callbacks.onSelectItem} modalShow={modalShow} setModalShow={setModalShow}></Modal> : null}
-      </>
+      <PageLayout>
+        <Head title="Mагазин" />
+        <Controls shoppingList={shoppingList} onAdd={callbacks.onAddItem} setModalShow={setModalShow} />
+        <List list={list} btnName={btnName[0]} onDeleteItem={callbacks.onAddItem} onSelectItem={callbacks.onSelectItem} setModalShow={setModalShow} />
+      </PageLayout>
+      {modalShow&&shoppingList ? (
+        <Modal
+          title={"Корзина"}
+          list={shoppingList}
+          btnName={btnName[1]}
+          onDeleteItem={callbacks.onDeleteItem}
+          onSelectItem={callbacks.onSelectItem}
+          modalShow={modalShow}
+          setModalShow={setModalShow}
+        ></Modal>
+      ) : null}
+    </>
   );
+  
 }
 
 export default App;

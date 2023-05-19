@@ -14,7 +14,6 @@ import PropTypes from "prop-types";
  * @param {Function} props.setModalShow set modal state
  * @returns {HTMLElement}
  */
-
 function List({ list, onDeleteItem, onSelectItem, btnName, modalShow, setModalShow }) {
   return (
     <div className="List">

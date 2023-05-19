@@ -1,4 +1,3 @@
-import item from "./components/item";
 import { generateCode } from "./utils";
 
 /**
@@ -32,55 +31,6 @@ class Store {
     return this.state;
   }
 
-  getShoppingList() {
-    // return array.push(this.state.list.find((item) => item.code == code))
-    return this.shoppingList;
-  }
-
-  setShoppingList(newState) {
-    this.shoppingList = newState;
-    // for (const listener of this.listeners) listener();
-  }
-
-  //   addInShoppingList(code){
-
-  // // const shoppingList = [...this.state.list]
-
-  // // const addedItem = shoppingList.filter((item) => item.code == code)
-  // // console.log(addedItem)
-  // // // if(addedItem){
-  // // //   ++addedItem.count
-  // // // }else{
-  // // //   const item = this.state.list.filter((item) => item.code == code)
-
-  // // //   shoppingList.push({...item,count:1})
-  // // // }
-  // // shoppingList.push({...addedItem})
-
-  //  this.setShoppingList(
-  //   // ...this.shoppingList,
-  //   // list:[ ...this.shoppingList,{...this.state.list.filter((item) => item.code == code)}]
-
-  //         // ...this.state,
-  //         // list: [...this.state.list, { code: generateCode(), title: "Новая запись" }],
-  //   //  this.test(code)
-
-  //     this.test(code)
-  //        // ...this.state,
-  //         // list: [...this.state.list, { code: generateCode(), title: "Новая запись" }],
-
-  //  )
-  // }
-
-  // test(code){
-
-  //   const list = []
-  // // const list = [...this.state.shoppingList]
-  // const addedItem = this.state.list.find((item) => item.code == code)
-  // list.push({...addedItem})
-  // return list
-  // }
-
   /**
    * Установка состояния
    * @param newState {Object}
@@ -102,19 +52,7 @@ class Store {
   }
 
   /**
-   * Удаление записи по коду
-   * @param code
-   */
-  // deleteItem(code) {
-  //   // this.setState({
-  //   //   ...this.state,
-  //   //   // Новый список, в котором не будет удаляемой записи
-  //   //   list: this.state.list.filter(item => item.code !== code)
-  //   // })
-  //   console.log(this.state.list.find((item) => item.code == code));
-  // }
-
-  /**
+   * Добавление новой записи в корзину
    * @param code
    */
   displayTotalShoppingList(code) {
@@ -131,16 +69,19 @@ class Store {
       ...this.state,
       shoppingList,
     });
-   
   }
 
-  deleteFromShoppingList(code){
+  /**
+   * Удаление записи из корзину
+   * @param code
+   */
+  deleteFromShoppingList(code) {
     this.setState({
       ...this.state,
-      shoppingList: this.state.shoppingList.filter(item=>item.code!==code)
-    })
-
+      shoppingList: this.state.shoppingList.filter((item) => item.code !== code),
+    });
   }
+
   /**
    * Выделение записи по коду
    * @param code

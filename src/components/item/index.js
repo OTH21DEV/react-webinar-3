@@ -36,17 +36,8 @@ function Item(props) {
         {numberWithSpace(props.item.price)}
         <span>&#8381;</span>
       </div>
-
       {props.modalShow ? <div className="Item-quantity">{props.item.count}шт</div> : null}
-
       <div className="Item-actions">
-        {/* 
-        {!props.list?
-        <button onClick={() => {setModalShow(false),callbacks.onDelete}}>{props.btnName}</button>
-      :
-      <button onClick={callbacks.onDelete}>{props.btnName}</button>
-      
-      } */}
         <button onClick={callbacks.onDelete}>{props.btnName}</button>
       </div>
     </div>
