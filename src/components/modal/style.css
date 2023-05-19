@@ -1,0 +1,32 @@
+.Modal-total {
+  display: flex;
+  width: 90%;
+  justify-content: end;
+}
+.Modal-total p {
+  text-align: end;
+  min-width: 10%;
+  font-weight: bold;
+}
+
+.Modal-overlay {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Modal {
+  width: 90%;
+  border-radius: 5px;
+  background-color: white;
+  animation: show 1.1s;
+}
+@keyframes show {
+  0% {
+    transform: translateY(-500px);
+  }
+}

@@ -49,3 +49,22 @@ export const generateCode1 = (function (start = 0) {
 export function generateCode2() {
   return generateCode2.value ? ++generateCode2.value : generateCode2.value = 1;
 }
+
+export function numberWithSpace(number){
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g," ")
+}
+
+export function calculateTotal(array) {
+  let sum = {};
+  let totalPrice = 0;
+  let totalQuantity = 0;
+  array.forEach((item) => {
+    sum = {
+      totalPrice: totalPrice + item.price * item.count,
+      totalQuantity: totalQuantity + item.count,
+    };
+    totalPrice = totalPrice + item.price * item.count;
+    totalQuantity = totalQuantity + item.count;
+  });
+  return sum;
+}
