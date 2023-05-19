@@ -25,6 +25,12 @@
   background-color: white;
   animation: show 1.1s;
 }
+
+.Modal-empty{
+  font-weight: bold;
+  text-align:end;
+  padding:0 30px;
+}
 @keyframes show {
   0% {
     transform: translateY(-500px);

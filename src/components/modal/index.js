@@ -24,13 +24,19 @@ function Modal({ title, list, btnName, onDeleteItem, onSelectItem, modalShow, se
     <div className="Modal-overlay">
       <div className="Modal">
         <Head title={title} modalShow={modalShow} setModalShow={setModalShow}></Head>
-        <List list={list} btnName={btnName} onDeleteItem={onDeleteItem} onSelectItem={onSelectItem} modalShow={modalShow} setModalShow={setModalShow} />
-        <div className="Modal-total">
-          <p>Итого</p>
-          <p>
-            {numberWithSpace(total.totalPrice)} <span>&#8381;</span>
-          </p>
-        </div>
+        {list.length ? (
+          <>
+            <List list={list} btnName={btnName} onDeleteItem={onDeleteItem} onSelectItem={onSelectItem} modalShow={modalShow} setModalShow={setModalShow} />
+            <div className="Modal-total">
+              <p>Итого</p>
+              <p>
+                {numberWithSpace(total.totalPrice)} <span>&#8381;</span>
+              </p>
+            </div>
+          </>
+        ) : (
+          <p className="Modal-empty">Корзина пуста</p>
+        )}
       </div>
     </div>
   );
