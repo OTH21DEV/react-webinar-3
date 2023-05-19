@@ -1,23 +1,26 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { plural } from "../../utils";
-import "./style.css";
+import React from "react";
 import { numberWithSpace } from "../../utils";
-import { calculateTotal } from "../../utils";
+import "./style.css";
+import PropTypes from "prop-types";
 
+/**
+ * Display item
+ * @param {Object} props item information
+ * @param {Boolean} props.item.selected show if selected
+ * @param {Number} props.item.code item code
+ * @param {String} props.item.title item title
+ * @param {Number} props.item.price item price
+ * @param {Boolean} props.modalShow modal state
+ * @param {Number} props.item.count item quantity in shopping list
+ * @param {Function} props.onDeleteItem callback func
+ * @returns {HTMLElement}
+ */
 function Item(props) {
-  const total = calculateTotal(props.list);
-  console.log(total);
-  console.log(props.list);
-  // Счётчик выделений
-  // const [count, setCount] = useState(0);
-
+  // console.log(props)
+  // console.log(typeof (props.item.selected))
   const callbacks = {
     onClick: () => {
       props.onSelect(props.item.code);
-      // if (!props.item.selected) {
-      //   setCount(count + 1);
-      // }
     },
     onDelete: (e) => {
       e.stopPropagation();
@@ -28,22 +31,22 @@ function Item(props) {
   return (
     <div className={"Item" + (props.item.selected ? " Item_selected" : "")} onClick={callbacks.onClick}>
       <div className="Item-code">{props.item.code}</div>
-      <div className="Item-title">
-        {props.item.title}
-        {/* {count ? ` | Выделяли ${count} ${plural(count, {one: 'раз', few: 'раза', many: 'раз'})}` : ''} */}
-      </div>
+      <div className="Item-title">{props.item.title}</div>
       <div className="Item-price">
         {numberWithSpace(props.item.price)}
         <span>&#8381;</span>
       </div>
 
-      {props.modalShow ? 
-  
-      <div className="Item-quantity">{props.item.count}шт</div> 
-    
-      : null}
- 
+      {props.modalShow ? <div className="Item-quantity">{props.item.count}шт</div> : null}
+
       <div className="Item-actions">
+        {/* 
+        {!props.list?
+        <button onClick={() => {setModalShow(false),callbacks.onDelete}}>{props.btnName}</button>
+      :
+      <button onClick={callbacks.onDelete}>{props.btnName}</button>
+      
+      } */}
         <button onClick={callbacks.onDelete}>{props.btnName}</button>
       </div>
     </div>

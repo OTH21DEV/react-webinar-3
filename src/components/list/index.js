@@ -1,33 +1,39 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import Item from "../item";
-import './style.css';
 import { generateCode } from "../../utils";
+import "./style.css";
+import PropTypes from "prop-types";
 
-function List({list, onDeleteItem, onSelectItem,btnName,modalShow}){
+/**
+ * Display list
+ * @param {Array} props.list array of items
+ * @param {String} props.btnName btn name
+ * @param {Function} props.onDeleteItem callback func
+ * @param {Function} props.onSelectItem callback func
+ * @param {Boolean} props.modalShow state of modal
+ * @param {Function} props.setModalShow set modal state
+ * @returns {HTMLElement}
+ */
 
+function List({ list, onDeleteItem, onSelectItem, btnName, modalShow, setModalShow }) {
   return (
-    <div className='List'>{
-      list.map(item =>
-        <div key={generateCode()} className='List-item'>
-          <Item list={list} item={item} onDelete={onDeleteItem} onSelect={onSelectItem} btnName={btnName} modalShow={modalShow}/>
+    <div className="List">
+      {list.map((item) => (
+        <div key={generateCode()} className="List-item">
+          <Item list={list} item={item} onDelete={onDeleteItem} onSelect={onSelectItem} btnName={btnName} modalShow={modalShow} setModalShow={setModalShow} />
         </div>
-      )}
+      ))}
     </div>
-  )
+  );
 }
 
 List.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.shape({
-    code: PropTypes.number
-  })),
-  onDeleteItem: PropTypes.func,
-  onSelectItem: PropTypes.func
+  list: PropTypes.array.isRequired,
+  btnName: PropTypes.string.isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  modalShow: PropTypes.bool,
+  setModalShow: PropTypes.func.isRequired,
 };
-
-List.defaultProps = {
-  onDeleteItem: () => {},
-  onSelectItem: () => {},
-}
 
 export default React.memo(List);

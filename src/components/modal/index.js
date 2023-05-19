@@ -1,28 +1,47 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { calculateTotal } from "../../utils";
-import { numberWithSpace } from "../../utils";
-
-import'./style.css'
 import Head from "../head";
 import List from "../list";
-import Item from "../item";
+import { calculateTotal } from "../../utils";
+import { numberWithSpace } from "../../utils";
+import "./style.css";
+import PropTypes from "prop-types";
 
-function Modal({ title, list, btnName, onDeleteItem, onSelectItem, modalShow ,setModalShow}) {
+/**
+ * Display modal 
+ * @param {String} props.title title
+ * @param {Array} props.list array of items in shopping list
+ * @param {String} props.btnName btn name
+ * @param {Function} props.onDeleteItem callback func
+ * @param {Function} props.onSelectItem callback func
+ * @param {Boolean} props.modalShow state of modal 
+ * @param {Function} props.setModalShow set modal state
+ * @returns {HTMLElement}
+ */
+
+function Modal({ title, list, btnName, onDeleteItem, onSelectItem, modalShow, setModalShow }) {
   const total = calculateTotal(list);
-  return (
-    <div className="Modal-overlay">
-    <div className="Modal">
-      <Head title={title} modalShow={modalShow} setModalShow={setModalShow}></Head>
 
-      {!list ? null : <List list={list} btnName={btnName} onDeleteItem={onDeleteItem} onSelectItem={onSelectItem} modalShow={modalShow} />}
-      <div className="Modal-total">
-        <p>Итого</p>
-        <p>{numberWithSpace (total.totalPrice)} <span>&#8381;</span></p>
+    return (
+      <div className="Modal-overlay">
+      <div className="Modal">
+        <Head title={title} modalShow={modalShow} setModalShow={setModalShow}></Head>
+        {!list ? setModalShow(false) : <List list={list} btnName={btnName} onDeleteItem={onDeleteItem} onSelectItem={onSelectItem} modalShow={modalShow} setModalShow={setModalShow}/>}
+        <div className="Modal-total">
+          <p>Итого</p>
+          <p>{numberWithSpace (total.totalPrice)} <span>&#8381;</span></p>
+        </div>
       </div>
-    </div>
-    </div>
-  );
-}
+      </div>
+    );
 
+}
+Modal.propTypes = {
+    title: PropTypes.string.isRequired,
+    list: PropTypes.array.isRequired,
+    btnName: PropTypes.string.isRequired,
+    onDeleteItem: PropTypes.func.isRequired,
+    onSelectItem: PropTypes.func.isRequired,
+    modalShow: PropTypes.bool.isRequired,
+    setModalShow: PropTypes.func.isRequired,
+  };
 export default Modal;

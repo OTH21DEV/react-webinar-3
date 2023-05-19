@@ -1,23 +1,17 @@
 .Controls {
   display: flex;
   justify-content: flex-end;
-  /* padding: 20px; */
   align-items: center;
-  border-bottom: 1px dashed #ccc
+  border-bottom: 1px dashed #ccc;
 }
 .Controls p span {
- font-weight: bold;
+  font-weight: bold;
 }
-.Controls-btn{
-  display:flex;
-padding:20px;
+.Controls-btn {
+  display: flex;
+  padding: 20px;
   justify-content: flex-end;
-  
- }
- .Controls-btn button{
-width:75px
- }
- .hide{
-overflow: hidden;
-  /* opacity:0.2 */
- }
+}
+.Controls-btn button {
+  width: 75px;
+}

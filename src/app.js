@@ -24,13 +24,6 @@ function App({ store }) {
       },
       [store]
     ),
-    // onDeleteItem: useCallback((code) => {
-    //   const test = store.displayTotalShoppingList(code)
-    //   console.log(test)
-    //   // console.log(store.addInShoppingList(code))
-    //   // store.deleteItem(code);
-    // }, [store]),
-
     onSelectItem: useCallback(
       (code) => {
         store.selectItem(code);
@@ -43,9 +36,6 @@ function App({ store }) {
       },
       [store]
     ),
-    // onAddItem: useCallback(() => {
-    //   store.addItem();
-    // }, [store])
   };
 
   return (
@@ -54,7 +44,6 @@ function App({ store }) {
       <Head title="Mагазин" />
       <Controls shoppingList={shoppingList} onAdd={callbacks.onAddItem} setModalShow={setModalShow} />
       <List list={list} btnName={btnName[0]} onDeleteItem={callbacks.onAddItem} onSelectItem={callbacks.onSelectItem} setModalShow={setModalShow}/>
-
     </PageLayout>
       {modalShow ? <Modal title={"Корзина"} list={shoppingList} btnName={btnName[1]} onDeleteItem={callbacks.onDeleteItem} onSelectItem={callbacks.onSelectItem} modalShow={modalShow} setModalShow={setModalShow}></Modal> : null}
       </>

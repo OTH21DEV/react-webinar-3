@@ -2,6 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 
+/**
+ * Display Head
+ * @param {String} props.title head title
+ * @param {Boolean} props.modalShow modal state
+ * @param {Function} props.setModalShow set modal state
+ * @returns {HTMLElement}
+ */
+
 function Head({ title, modalShow, setModalShow }) {
   return (
     <div className="Head">
@@ -22,7 +30,9 @@ function Head({ title, modalShow, setModalShow }) {
 }
 
 Head.propTypes = {
-  title: PropTypes.node,
+  title: PropTypes.string.isRequired,
+  modalShow: PropTypes.bool,
+  setModalShow: PropTypes.func,
 };
 
 export default React.memo(Head);
