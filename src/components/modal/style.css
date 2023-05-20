@@ -24,6 +24,8 @@
   border-radius: 5px;
   background-color: white;
   animation: show 1.1s;
+  border:1px solid transparent;
+  border-radius: 10px;
 }
 
 .Modal-empty{
