@@ -28,7 +28,7 @@ function Head({ title, modalShow, setModalShow }) {
   );
 }
 
-Head.propTypes = {
+Head.propTypes = { 
   title: PropTypes.string.isRequired,
   modalShow: PropTypes.bool,
   setModalShow: PropTypes.func,

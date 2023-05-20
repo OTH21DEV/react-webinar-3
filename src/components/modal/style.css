@@ -1,11 +1,11 @@
 .Modal-total {
   display: flex;
-  width: 90%;
+  padding-right: 100px;
   justify-content: end;
 }
 .Modal-total p {
   text-align: end;
-  min-width: 10%;
+  min-width: 9%;
   font-weight: bold;
 }
 
