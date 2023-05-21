@@ -1,7 +1,7 @@
 import React from "react";
 import { numberWithSpace } from "../../utils";
 import { plural } from "../../utils";
-import { calculateTotal } from "../../utils";
+// import { calculateTotal } from "../../utils";
 import "./style.css";
 import PropTypes from "prop-types";
 
@@ -9,17 +9,17 @@ import PropTypes from "prop-types";
  * Display Controls
  * @param {Array} shoppingList array of items in shopping list
  * @param {Function} setModalShow set modal state
+ * @param {Number} total total item's price in shopping list
  * @returns {HTMLElement}
  */
-function Controls({ shoppingList, setModalShow }) {
-  let total = calculateTotal(shoppingList);
+function Controls({ shoppingList, setModalShow ,total}) {
   let locale;
   let variants;
-
+console.log(total)
   return (
     <div className="Controls">
       <div>
-        {!total.totalQuantity ? (
+        {!shoppingList.length ? (
           <p>
             {`В корзине:`} <span>{`пусто`}</span>{" "}
           </p>
@@ -27,7 +27,7 @@ function Controls({ shoppingList, setModalShow }) {
           <p>
             {`В корзине:`}{" "}
             <span>
-              {`${total.totalQuantity} ${plural(total.totalQuantity, (variants = { one: "товар", few: "товара", many: "товаров" }), (locale = "ru-RU"))} / ${numberWithSpace(total.totalPrice)}`}{" "}
+              {`${shoppingList.length} ${plural(shoppingList.length, (variants = { one: "товар", few: "товара", many: "товаров" }), (locale = "ru-RU"))} / ${numberWithSpace(total)}`}{" "}
             </span>
             <span>&#8381;</span>
           </p>

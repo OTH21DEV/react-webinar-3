@@ -12,8 +12,11 @@ import Modal from "./components/modal";
  */
 function App({ store }) {
   const list = store.getState().list;
-  let shoppingList = store.getState().shoppingList;
+  const shoppingList = store.getState().shoppingList;
+  const total= store.getState().total;
   console.log(shoppingList);
+ console.log(total);
+ 
 
   const [modalShow, setModalShow] = useState(false);
   const btnName = ["Добавить", "Удалить"];
@@ -43,7 +46,7 @@ function App({ store }) {
     <>
       <PageLayout>
         <Head title="Mагазин" />
-        <Controls shoppingList={shoppingList} onAdd={callbacks.onAddItem} setModalShow={setModalShow} />
+        <Controls shoppingList={shoppingList} onAdd={callbacks.onAddItem} setModalShow={setModalShow} total={total}/>
         <List list={list} btnName={btnName[0]} onDeleteItem={callbacks.onAddItem} onSelectItem={callbacks.onSelectItem} setModalShow={setModalShow} />
       </PageLayout>
       {modalShow&&shoppingList ? (
