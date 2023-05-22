@@ -17,6 +17,12 @@
   border-radius: 10px;
 }
 
+@media all and (min-width: 1500px) {
+  .Modal {
+    width: 58%;
+  }
+}
+
 @keyframes show {
   0% {
     transform: translateY(-500px);
