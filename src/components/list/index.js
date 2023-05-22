@@ -30,7 +30,7 @@ List.propTypes = {
   list: PropTypes.array.isRequired,
   btnName: PropTypes.string.isRequired,
   onDeleteItem: PropTypes.func.isRequired,
-  onSelectItem: PropTypes.func.isRequired,
+  onSelectItem: PropTypes.func,
   modalShow: PropTypes.bool,
   setModalShow: PropTypes.func.isRequired,
 };

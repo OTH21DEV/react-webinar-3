@@ -4,6 +4,7 @@ import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
 import Modal from "./components/modal";
+import ShoppingList from "./components/shopping-list";
 
 /**
  * Приложение
@@ -13,10 +14,9 @@ import Modal from "./components/modal";
 function App({ store }) {
   const list = store.getState().list;
   const shoppingList = store.getState().shoppingList;
-  const total= store.getState().total;
+  const total = store.getState().total;
   console.log(shoppingList);
- console.log(total);
- 
+  console.log(total);
 
   const [modalShow, setModalShow] = useState(false);
   const btnName = ["Добавить", "Удалить"];
@@ -46,23 +46,25 @@ function App({ store }) {
     <>
       <PageLayout>
         <Head title="Mагазин" />
-        <Controls shoppingList={shoppingList} onAdd={callbacks.onAddItem} setModalShow={setModalShow} total={total}/>
+        <Controls shoppingList={shoppingList} onAdd={callbacks.onAddItem} setModalShow={setModalShow} total={total} />
         <List list={list} btnName={btnName[0]} onDeleteItem={callbacks.onAddItem} onSelectItem={callbacks.onSelectItem} setModalShow={setModalShow} />
       </PageLayout>
-      {modalShow&&shoppingList ? (
-        <Modal
-          title={"Корзина"}
-          list={shoppingList}
-          btnName={btnName[1]}
-          onDeleteItem={callbacks.onDeleteItem}
-          onSelectItem={callbacks.onSelectItem}
-          modalShow={modalShow}
-          setModalShow={setModalShow}
-        ></Modal>
+      {modalShow && shoppingList ? (
+        <Modal>
+          <ShoppingList
+            title={"Корзина"}
+            list={shoppingList}
+            total={total}
+            btnName={btnName[1]}
+            onDeleteItem={callbacks.onDeleteItem}
+            onSelectItem={callbacks.onSelectItem}
+            modalShow={modalShow}
+            setModalShow={setModalShow}
+          ></ShoppingList>
+        </Modal>
       ) : null}
     </>
   );
-  
 }
 
 export default App;

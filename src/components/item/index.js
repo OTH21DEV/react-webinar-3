@@ -16,8 +16,7 @@ import PropTypes from "prop-types";
  * @returns {HTMLElement}
  */
 function Item(props) {
-  // console.log(props)
-  // console.log(typeof (props.item.selected))
+
   const callbacks = {
     onClick: () => {
       props.onSelect(props.item.code);

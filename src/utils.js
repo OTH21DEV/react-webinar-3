@@ -58,23 +58,3 @@ export function generateCode2() {
 export function numberWithSpace(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
-
-/**
- * Вывод суммы корзины
- * @param {*} array 
- * @returns {Object} sum 
- */
-export function calculateTotal(array) {
-  let sum = {};
-  let totalPrice = 0;
-  let totalQuantity = 0;
-  array.forEach((item) => {
-    sum = {
-      totalPrice: totalPrice + item.price * item.count,
-      totalQuantity: totalQuantity + item.count,
-    };
-    totalPrice = totalPrice + item.price * item.count;
-    totalQuantity = totalQuantity + item.count;
-  });
-  return sum;
-}

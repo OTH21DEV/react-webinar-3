@@ -1,0 +1,22 @@
+.Total-sum-container {
+  margin-top: 40px;
+  margin-bottom: 70px;
+}
+
+.Total-sum {
+  display: flex;
+  padding-right: 100px;
+  justify-content: end;
+}
+
+.Total-sum p {
+  text-align: end;
+  min-width: 9%;
+  font-weight: bold;
+}
+
+.Total-sum__empty {
+  font-weight: bold;
+  text-align: end;
+  padding: 0 30px;
+}

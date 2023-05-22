@@ -73,13 +73,6 @@ class Store {
       shoppingList,
     });
 
-    /**
-     * Установка суммы корзины при добавлении товара
-     */
-    // this.setState({
-    //   ...this.state,
-    //   total: { sum: this.calculateTotalPrice(), selectedItems: shoppingList.length },
-    // });
     this.updateTotalPrice()
   }
 
@@ -105,15 +98,6 @@ class Store {
       shoppingList: this.state.shoppingList.filter((item) => item.code !== code),
     });
     
-    /**
-     * Установка суммы корзины при удалении товара
-     */
-    // this.setState({
-    //   ...this.state,
-    //   totalPrice: { sum: this.calculateTotalPrice(), selectedItems: this.state.shoppingList.length },
-    //   totalPrice:  this.calculateTotalPrice()
-    // });
-    // console.log(this.state.shoppingList.length)
     this.updateTotalPrice()
   }
 
@@ -124,7 +108,6 @@ class Store {
      total: this.calculateTotalPrice()
     });
   }
-
 
 
   /**

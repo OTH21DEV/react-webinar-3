@@ -1,7 +1,6 @@
 import React from "react";
 import { numberWithSpace } from "../../utils";
 import { plural } from "../../utils";
-// import { calculateTotal } from "../../utils";
 import "./style.css";
 import PropTypes from "prop-types";
 
@@ -15,7 +14,7 @@ import PropTypes from "prop-types";
 function Controls({ shoppingList, setModalShow ,total}) {
   let locale;
   let variants;
-console.log(total)
+
   return (
     <div className="Controls">
       <div>
@@ -49,5 +48,6 @@ console.log(total)
 Controls.propTypes = {
   shoppingList: PropTypes.array.isRequired,
   setModalShow: PropTypes.func.isRequired,
+  total: PropTypes.number
 };
 export default React.memo(Controls);
