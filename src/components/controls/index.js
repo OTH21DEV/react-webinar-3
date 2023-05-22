@@ -6,28 +6,25 @@ import PropTypes from "prop-types";
 
 /**
  * Display Controls
- * @param {Array} shoppingList array of items in shopping list
+ * @param {Number} selectedItems number of items in shopping list
  * @param {Function} setModalShow set modal state
  * @param {Number} total total item's price in shopping list
  * @returns {HTMLElement}
  */
-function Controls({ shoppingList, setModalShow ,total}) {
+function Controls({ selectedItems, setModalShow, total }) {
   let locale;
   let variants;
 
   return (
     <div className="Controls">
       <div>
-        {!shoppingList.length ? (
+        {!selectedItems ? (
           <p>
             {`В корзине:`} <span>{`пусто`}</span>{" "}
           </p>
         ) : (
           <p>
-            {`В корзине:`}{" "}
-            <span>
-              {`${shoppingList.length} ${plural(shoppingList.length, (variants = { one: "товар", few: "товара", many: "товаров" }), (locale = "ru-RU"))} / ${numberWithSpace(total)}`}{" "}
-            </span>
+            {`В корзине:`} <span>{`${selectedItems} ${plural(selectedItems, (variants = { one: "товар", few: "товара", many: "товаров" }), (locale = "ru-RU"))} / ${numberWithSpace(total)}`} </span>
             <span>&#8381;</span>
           </p>
         )}{" "}
@@ -46,8 +43,8 @@ function Controls({ shoppingList, setModalShow ,total}) {
 }
 
 Controls.propTypes = {
-  shoppingList: PropTypes.array.isRequired,
+  selectedItems: PropTypes.number,
   setModalShow: PropTypes.func.isRequired,
-  total: PropTypes.number
+  total: PropTypes.number,
 };
 export default React.memo(Controls);

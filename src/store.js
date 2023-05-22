@@ -74,6 +74,7 @@ class Store {
     });
 
     this.updateTotalPrice()
+    this.updateSelectedItems()
   }
 
   /**
@@ -88,6 +89,15 @@ class Store {
     return sum;
   }
 
+   /**
+   *Расчет количества товаров в корзине
+   * @returns {Number} sum сумма корзины
+   */
+  calculateSelectedItems() {
+    let selectedItems =  this.state.shoppingList.length
+    return selectedItems
+  }
+
   /**
    * Удаление записи из корзины
    * @param code
@@ -99,8 +109,12 @@ class Store {
     });
     
     this.updateTotalPrice()
+    this.updateSelectedItems()
   }
 
+  /**
+   * Обновление состояния суммы всех товаров в корзине
+   */
   updateTotalPrice(){
 
     this.setState({
@@ -109,6 +123,16 @@ class Store {
     });
   }
 
+  /**
+   * Обновление состояния количества товаров в корзине
+   */
+  updateSelectedItems(){
+
+    this.setState({
+      ...this.state,
+     selectedItems: this.calculateSelectedItems()
+    });
+  }
 
   /**
    * Выделение записи по коду
