@@ -15,10 +15,8 @@
   align-items: center;
 }
 
-.item-details-description{
-    padding-bottom:10px;
-
-    
+.item-details-description {
+  padding-bottom: 10px;
 }
 .item-details-country p,
 .item-details-category p,
@@ -47,6 +45,18 @@
   padding-left: 5px;
 }
 
-.item-details-btn{
-    margin-left:50px
+.item-details-btn {
+  margin-left: 50px;
+}
+.item-details-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-details-main a {
+  padding-left: 15px;
+  font-size: 1.2em;
+  color: #8fcaf5;
+  text-decoration-line: underline;
 }

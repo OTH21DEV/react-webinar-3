@@ -4,6 +4,7 @@ import BasketTool from "../basket-tool";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import PageLayout from "../page-layout";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 const ItemDetails = () => {
@@ -17,7 +18,7 @@ const ItemDetails = () => {
     store.actions.ItemDetails.load(pathid);
   }, []);
 
-  //access to state of items details and basket 
+  //access to state of items details and basket
   const select = useSelector((state) => ({
     details: state.ItemDetails.details,
     basket: state.basket,
@@ -33,7 +34,10 @@ const ItemDetails = () => {
     <>
       <PageLayout productTitle={select.details.title}>
         <Head title={select.details.title} />
-        <BasketTool onOpen={callbacks.openModalBasket} amount={select.basket.amount} sum={select.basket.sum} />
+        <div className="item-details-main">
+          <Link to={"/"}>Главная</Link>
+          <BasketTool onOpen={callbacks.openModalBasket} amount={select.basket.amount} sum={select.basket.sum} />
+        </div>
         <div className="item-details-container">
           <div className="item-details-description">{select.details.description}</div>
 
