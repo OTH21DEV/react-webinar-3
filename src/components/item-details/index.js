@@ -7,6 +7,10 @@ import PageLayout from "../page-layout";
 import { Link } from "react-router-dom";
 import "./style.css";
 
+/**
+ *Display item description
+ * @returns {HTMLElement}
+ */
 const ItemDetails = () => {
   //get the id params
   let pathArray = window.location.pathname.split("/");

@@ -1,11 +1,18 @@
-import { memo, useState } from "react";
-import PropTypes from "prop-types";
+import { memo } from "react";
 import { cn as bem } from "@bem-react/classname";
 import { numberFormat } from "../../utils";
-import "./style.css";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "./style.css";
+import PropTypes from "prop-types";
 
+/**
+ *Display Item
+ * @param {Object} props items
+ * @param {String} props.item._id items id
+ * @param {String} props.item.title items title
+ * @param {String} props.item.price items price
+ * @returns {HTMLElement}
+ */
 function Item(props) {
   const cn = bem("Item");
 
@@ -13,14 +20,9 @@ function Item(props) {
     onAdd: (e) => props.onAdd(props.item._id),
   };
 
-  let navigate = useNavigate();
-  const routeChange = () => {
-    navigate(`/${props.item._id}`);
-  };
-
   return (
     <div className={cn()}>
-      <Link className={cn("title")} to={routeChange()}>
+      <Link className={cn("title")} to={`/${props.item._id}`}>
         <div>{props.item.title}</div>
       </Link>
       <div className={cn("actions")}>

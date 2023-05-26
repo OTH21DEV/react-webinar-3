@@ -8,7 +8,10 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from "../../components/pagination";
 
-
+/**
+ * Display main page
+ * @returns {HTMLElement}
+ */
 function Main() {
   const store = useStore();
   console.log(store);
@@ -39,13 +42,11 @@ function Main() {
   };
 
   return (
-  
-    //   <List list={select.list} renderItem={renders.item} />
     <PageLayout>
-    <Head title="Магазин" />
-    <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
-    <Pagination list={select.list} renderItem={renders.item}></Pagination>
-  </PageLayout>
+      <Head title="Магазин" />
+      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
+      <Pagination list={select.list} renderItem={renders.item}></Pagination>
+    </PageLayout>
   );
 }
 

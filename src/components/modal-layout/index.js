@@ -3,6 +3,13 @@ import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
 import './style.css';
 
+/**
+ * Display modal layout
+ * @param {String} props.title modal title 
+ * @param {Function} props.onClose close modal function
+ * @returns {HTMLElement}
+ */
+
 function ModalLayout(props) {
 
   const cn = bem('ModalLayout');
