@@ -14,6 +14,7 @@ class StoreModule {
   }
 
   getState() {
+    //exe : getState().catalog.list
     return this.store.getState()[this.name];
   }
 
