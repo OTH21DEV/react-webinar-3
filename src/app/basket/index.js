@@ -24,14 +24,17 @@ function Basket() {
     removeFromBasket: useCallback((_id) => store.actions.basket.removeFromBasket(_id), [store]),
     // Закрытие любой модалки
     closeModal: useCallback(() => store.actions.modals.close(), [store]),
+
+  //Open item details
+  openItemDetails: useCallback((_id)=>store.actions.ItemDetails.load(_id), [store])
   };
 
   const renders = {
     itemBasket: useCallback(
       (item) => {
-        return <ItemBasket item={item} onRemove={callbacks.removeFromBasket} />;
+        return <ItemBasket item={item} onRemove={callbacks.removeFromBasket} onClose={callbacks.closeModal} openItem={callbacks.openItemDetails}/>;
       },
-      [callbacks.removeFromBasket]
+      [callbacks.removeFromBasket,callbacks.closeModal]
     ),
   };
 

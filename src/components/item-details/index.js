@@ -20,7 +20,7 @@ const ItemDetails = () => {
 
   useEffect(() => {
     store.actions.ItemDetails.load(pathid);
-  }, []);
+  }, [store]);
 
   //access to state of items details and basket
   const select = useSelector((state) => ({
