@@ -1,11 +1,10 @@
-import { memo,useCallback,useState,useEffect } from "react";
+import { memo} from "react";
 import propTypes from "prop-types";
 import { numberFormat } from "../../utils";
 import { cn as bem } from "@bem-react/classname";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./style.css";
-import useStore from "../../store/use-store";
 
 /**
  * Display item in the basket
@@ -22,22 +21,20 @@ function ItemBasket(props) {
 
   const callbacks = {
     onRemove: (e) => props.onRemove(props.item._id),
-   closeModal: () => props.onClose(),
-  // closeModal: useCallback(()=>store.actions.modals.close(),[store]) ,
-  openItem:()=>props.openItem(props.item._id)
+    closeModal: () => props.onClose(),
+    openItem: () => props.openItem(props.item._id),
   };
 
+  function handleClick() {
+    callbacks.closeModal();
+    callbacks.openItem();
+  }
 
   return (
     <div className={cn()}>
-     
-     <Link className={cn("title")} to={`/${props.item._id}`} onClick={callbacks.openItem}>
+      <Link className={cn("title")} to={"/" + props.item._id} onClick={handleClick}>
         {props.item.title}
       </Link>
-     
-          {/* <Link className={cn("title")} to={`/${props.item._id}`} onClick={()=>{callbacks.openItem,callbacks.closeModal}}>
-        {props.item.title}
-      </Link> */}
       <div className={cn("right")}>
         <div className={cn("cell")}>{numberFormat(props.item.price)} ₽</div>
         <div className={cn("cell")}>{numberFormat(props.item.amount || 0)} шт</div>

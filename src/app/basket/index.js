@@ -34,7 +34,7 @@ function Basket() {
       (item) => {
         return <ItemBasket item={item} onRemove={callbacks.removeFromBasket} onClose={callbacks.closeModal} openItem={callbacks.openItemDetails}/>;
       },
-      [callbacks.removeFromBasket,callbacks.closeModal]
+      [callbacks.removeFromBasket,callbacks.closeModal,callbacks.openItem]
     ),
   };
 
