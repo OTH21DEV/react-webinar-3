@@ -11,13 +11,13 @@ import "./style.css";
  * @param {onOpen} func func to open the basket
  * @returns {HTMLElement}
  */
-function BasketTool({ sum, amount, onOpen }) {
+function BasketTool({ sum, amount, onOpen,dictionary }) {
   const cn = bem("BasketTool");
   return (
     <div className={cn()}>
-      <span className={cn("label")}>В корзине:</span>
-      <span className={cn("total")}>{amount ? `${amount} ${plural(amount, { one: "товар", few: "товара", many: "товаров" })} / ${numberFormat(sum)} ₽` : `пусто`}</span>
-      <button onClick={onOpen}>Перейти</button>
+      <span className={cn("label")}>{dictionary.basket}</span>
+      <span className={cn("total")}>{amount ? `${amount} ${plural(amount, { one: dictionary.item, few: dictionary.fewItems, many: dictionary.manyItems })} / ${numberFormat(sum)} ₽` : `${dictionary.basketEmpty}`}</span>
+      <button onClick={onOpen}>{dictionary.basketBtn}</button>
     </div>
   );
 }

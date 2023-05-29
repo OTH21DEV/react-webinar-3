@@ -1,0 +1,12 @@
+
+
+{
+    "head":"Магазин",
+    "basket":"В корзине:",
+    "basketEmpty": "пусто",
+    "basketBtn":"Перейти",
+    "item":  "товар", 
+    "fewItems": "товара",
+    "manyItems": "товаров",
+    "itemBtn":"Добавить"
+}

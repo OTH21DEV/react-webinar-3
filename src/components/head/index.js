@@ -1,6 +1,7 @@
-import { memo } from "react";
+import { memo} from "react";
 import PropTypes from "prop-types";
 import "./style.css";
+
 
 /**
  * Display header
@@ -8,9 +9,11 @@ import "./style.css";
  * @returns
  */
 function Head({ title }) {
+
   return (
     <div className="Head">
       <h1>{title}</h1>
+     
     </div>
   );
 }

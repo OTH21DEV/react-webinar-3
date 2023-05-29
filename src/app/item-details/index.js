@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback,useContext } from "react";
 import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
 import useStore from "../../store/use-store";
@@ -7,7 +7,8 @@ import PageLayout from "../../components/page-layout";
 import LinkBasketWrapper from "../../components/link-basket-wrapper";
 import LinkMainPage from "../../components/link-mainpage";
 import ItemContent from "../../components/item-content";
-
+import LanguageSelector from "../../components/language-selector";
+import { LanguageContext } from "../../containers/Language";
 /**
  *Display item description
  * @returns {HTMLElement}
@@ -35,7 +36,7 @@ const ItemDetails = () => {
     addToBasket: useCallback((pathid) => store.actions.basket.addToBasket(pathid), [store]),
     openModalBasket: useCallback(() => store.actions.modals.open("basket"), [store]),
   };
-
+  const { dictionary } = useContext(LanguageContext);
   return (
     <>
       <PageLayout productTitle={select.details.title}>
@@ -44,7 +45,7 @@ const ItemDetails = () => {
         <LinkBasketWrapper>
           <LinkMainPage />
 
-          <BasketTool onOpen={callbacks.openModalBasket} amount={select.basket.amount} sum={select.basket.sum} />
+          <BasketTool onOpen={callbacks.openModalBasket} amount={select.basket.amount} sum={select.basket.sum} dictionary={dictionary}/>
         </LinkBasketWrapper>
 
         <ItemContent details={select.details} onAdd={callbacks.addToBasket} />
