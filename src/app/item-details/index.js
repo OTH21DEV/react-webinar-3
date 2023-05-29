@@ -15,7 +15,8 @@ import ItemContent from "../../components/item-content";
 const ItemDetails = () => {
   //get the id params
   let pathArray = window.location.pathname.split("/");
-  let pathid = pathArray[1];
+  console.log(pathArray)
+  let pathid = pathArray[2];
 
   const store = useStore();
 
