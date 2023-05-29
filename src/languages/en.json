@@ -1,12 +1,10 @@
-
-
 {
-    "head":"Shop",
-    "basket":"Basket:",
-    "basketEmpty": "empty",
-    "basketBtn":"Open",
-    "item":  "item", 
-    "fewItems": "items",
-    "manyItems": "items" ,
-    "itemBtn":"Add"
+  "head": "Shop",
+  "basket": "Basket:",
+  "basketEmpty": "empty",
+  "basketBtn": "Open",
+  "item": "item",
+  "fewItems": "items",
+  "manyItems": "items",
+  "itemBtn": "Add"
 }
