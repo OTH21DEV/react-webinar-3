@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./main";
 import Basket from "./basket";
-import ItemDetails from "../components/item-details";
+import ItemDetails from "./item-details";
 import useSelector from "../store/use-selector";
 
 /**
@@ -18,6 +18,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/:id" element={<ItemDetails />} />
         </Routes>
+
         {activeModal === "basket" && <Basket />}
       </Router>
     </>
