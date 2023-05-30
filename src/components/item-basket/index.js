@@ -32,7 +32,7 @@ function ItemBasket(props) {
 
   return (
     <div className={cn()}>
-      <Link className={cn("title")} to={"articles/" + props.item._id} onClick={handleClick}>
+      <Link className={cn("title")} to={props.to} onClick={handleClick}>
         {props.item.title}
       </Link>
       <div className={cn("right")}>

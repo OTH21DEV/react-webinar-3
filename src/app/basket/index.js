@@ -32,7 +32,7 @@ function Basket() {
   const renders = {
     itemBasket: useCallback(
       (item) => {
-        return <ItemBasket item={item} onRemove={callbacks.removeFromBasket} onClose={callbacks.closeModal} openItem={callbacks.openItemDetails}/>;
+        return <ItemBasket item={item} onRemove={callbacks.removeFromBasket} onClose={callbacks.closeModal} openItem={callbacks.openItemDetails} to={`articles/${item._id}`}/>;
       },
       [callbacks.removeFromBasket,callbacks.closeModal,callbacks.openItem]
     ),
