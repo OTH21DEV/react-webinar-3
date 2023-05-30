@@ -6,9 +6,9 @@ import useSelector from "../../store/use-selector";
 import PageLayout from "../../components/page-layout";
 import LinkBasketWrapper from "../../components/link-basket-wrapper";
 import ItemContent from "../../components/item-content";
-import LanguageSelector from "../../components/language-selector";
-import { LanguageContext } from "../../containers/Language";
 import Navbar from "../../components/navbar";
+import { LanguageContext } from "../../containers/Language";
+
 /**
  *Display item description
  * @returns {HTMLElement}
@@ -38,14 +38,13 @@ const ItemDetails = () => {
   };
   const { dictionary } = useContext(LanguageContext);
 
-  
   return (
     <>
       <PageLayout productTitle={select.details.title}>
         <Head title={select.details.title} />
 
         <LinkBasketWrapper>
-          <Navbar links={[{to:'/',content: 'Главная'}]}/>
+          <Navbar links={[{ to: "/", content: "Главная" }]} />
           <BasketTool onOpen={callbacks.openModalBasket} amount={select.basket.amount} sum={select.basket.sum} dictionary={dictionary} />
         </LinkBasketWrapper>
 

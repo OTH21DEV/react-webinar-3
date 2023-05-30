@@ -10,6 +10,7 @@ import LinkBasketWrapper from "../../components/link-basket-wrapper";
 import LanguageSelector from "../../components/language-selector";
 import Navbar from "../../components/navbar";
 import { LanguageContext } from "../../containers/Language";
+
 /**
  * Display main page
  * @returns {HTMLElement}

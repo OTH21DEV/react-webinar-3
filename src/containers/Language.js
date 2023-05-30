@@ -23,8 +23,6 @@ export function LanguageProvider({ children }) {
     dictionary: dictionaryList[userLanguage],
     userLanguageChange: (newLanguage) => {
       const defaultLanguage = localStorage.getItem("rcml-lang");
-
-      //   const [userLanguage, setUserLanguage] = useState(defaultLanguage || "ru");
       setUserLanguage(newLanguage);
       localStorage.setItem("rcml-lang", newLanguage);
       localStorage.getItem("rcml-lang");

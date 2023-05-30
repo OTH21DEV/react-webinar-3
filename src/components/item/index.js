@@ -18,9 +18,9 @@ function Item(props) {
 
   const callbacks = {
     onAdd: (e) => props.onAdd(props.item._id),
-   
   };
-console.log(props.dictionary)
+  
+  // console.log(props.dictionary);
   return (
     <div className={cn()}>
       <Link className={cn("title")} to={props.to}>
