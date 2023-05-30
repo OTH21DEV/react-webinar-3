@@ -1,0 +1,11 @@
+.navbar-list{
+    list-style-type: none;
+    padding:0
+}
+
+.navbar-link{
+    padding-left: 20px;
+    font-size: 1.2em;
+    color: #8fcaf5;
+    text-decoration-line: underline;
+}

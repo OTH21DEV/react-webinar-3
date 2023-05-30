@@ -7,8 +7,9 @@ import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from "../../components/pagination";
-
+import LinkBasketWrapper from "../../components/link-basket-wrapper";
 import LanguageSelector from "../../components/language-selector";
+import Navbar from "../../components/navbar";
 import { LanguageContext } from "../../containers/Language";
 /**
  * Display main page
@@ -58,7 +59,17 @@ function Main() {
       <LanguageSelector></LanguageSelector>
       
       <Head title={dictionary.head}/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} dictionary={dictionary}/>
+
+
+
+      <LinkBasketWrapper>
+          <Navbar links={[{to:'/',content: 'Главная'}]}/>
+          {/* <BasketTool onOpen={callbacks.openModalBasket} amount={select.basket.amount} sum={select.basket.sum} dictionary={dictionary} /> */}
+          <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} dictionary={dictionary}/>
+        </LinkBasketWrapper>
+
+
+   
       <Pagination list={select.list} renderItem={renders.item}></Pagination>
     </PageLayout>
   );
