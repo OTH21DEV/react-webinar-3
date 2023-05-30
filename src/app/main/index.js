@@ -63,7 +63,7 @@ function Main() {
       <Head title={dictionary.head} />
 
       <LinkBasketWrapper>
-        <Navbar links={[{ to: "/", content: "Главная" }]} />
+        <Navbar links={[{ to: "/", content: "Главная" }]} setItems={callbacks.setItems} currentPage={select.currentPage} setPage={callbacks.setCurrentPage} itemsPerPage={select.itemsPerPage} />
         <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} dictionary={dictionary} />
       </LinkBasketWrapper>
 

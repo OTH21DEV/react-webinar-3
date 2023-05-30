@@ -29,12 +29,19 @@ const ItemDetails = () => {
   const select = useSelector((state) => ({
     details: state.ItemDetails.details,
     basket: state.basket,
+    
+    itemsPerPage: state.catalog.itemsPerPage,
+    currentPage: state.catalog.currentPage,
   }));
 
   //get the actions from the store to add items in the basket and open modal
   const callbacks = {
     addToBasket: useCallback((pathid) => store.actions.basket.addToBasket(pathid), [store]),
     openModalBasket: useCallback(() => store.actions.modals.open("basket"), [store]),
+    //Текущая страница
+    setCurrentPage: useCallback((page) => store.actions.catalog.setCurrentPage(page), [store]),
+    //Загрузка товаров текущей страницы
+    setItems: useCallback((limit, skip) => store.actions.catalog.setItemsInCurrentPage(limit, skip), [store]),
   };
   const { dictionary } = useContext(LanguageContext);
 
@@ -44,7 +51,7 @@ const ItemDetails = () => {
         <Head title={select.details.title} />
 
         <LinkBasketWrapper>
-          <Navbar links={[{ to: "/", content: "Главная" }]} />
+          <Navbar links={[{ to: "/", content: "Главная" }]} setItems={callbacks.setItems} currentPage={select.currentPage} setPage={callbacks.setCurrentPage} itemsPerPage={select.itemsPerPage} />
           <BasketTool onOpen={callbacks.openModalBasket} amount={select.basket.amount} sum={select.basket.sum} dictionary={dictionary} />
         </LinkBasketWrapper>
 
