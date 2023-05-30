@@ -23,7 +23,7 @@ function Item(props) {
 console.log(props.dictionary)
   return (
     <div className={cn()}>
-      <Link className={cn("title")} to={`articles/${props.item._id}`}>
+      <Link className={cn("title")} to={props.to}>
         <div>{props.item.title}</div>
       </Link>
       <div className={cn("actions")}>
