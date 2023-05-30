@@ -1,9 +1,8 @@
-import { memo, useCallback, useEffect,useContext } from "react";
+import { memo, useCallback, useEffect, useContext } from "react";
 import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
-import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from "../../components/pagination";
@@ -19,57 +18,65 @@ function Main() {
   const store = useStore();
   console.log(store);
   useEffect(() => {
-    store.actions.catalog.load();
+    // store.actions.catalog.load();
+    store.actions.catalog.getTotalPages();
+    store.actions.catalog.setItemsInCurrentPage();
   }, []);
 
   const select = useSelector((state) => ({
     list: state.catalog.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
+    totalPages: state.catalog.totalPages,
+    itemsPerPage: state.catalog.itemsPerPage,
+    currentPage: state.catalog.currentPage,
   }));
 
   const { dictionary } = useContext(LanguageContext);
-  console.log(dictionary)
-
+  // console.log(dictionary)
 
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback((_id) => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open("basket"), [store]),
-    
+    //Текущая страница
+    setCurrentPage: useCallback((page) => store.actions.catalog.setCurrentPage(page), [store]),
+    //Загрузка товаров текущей страницы
+    setItems: useCallback((limit, skip) => store.actions.catalog.setItemsInCurrentPage(limit, skip), [store]),
   };
 
   const renders = {
     item: useCallback(
       (item) => {
-        return <Item item={item} onAdd={callbacks.addToBasket} to={`articles/${item._id}`}/>;
+        return <Item item={item} onAdd={callbacks.addToBasket} to={`articles/${item._id}`} />;
       },
       [callbacks.addToBasket]
     ),
   };
 
-  ///test
-
-
   return (
     <PageLayout>
- 
       <LanguageSelector></LanguageSelector>
-      
-      <Head title={dictionary.head}/>
 
-
+      <Head title={dictionary.head} />
 
       <LinkBasketWrapper>
-          <Navbar links={[{to:'/',content: 'Главная'}]}/>
-          {/* <BasketTool onOpen={callbacks.openModalBasket} amount={select.basket.amount} sum={select.basket.sum} dictionary={dictionary} /> */}
-          <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} dictionary={dictionary}/>
-        </LinkBasketWrapper>
+        <Navbar links={[{ to: "/", content: "Главная" }]} />
+        <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} dictionary={dictionary} />
+      </LinkBasketWrapper>
 
-
-   
-      <Pagination list={select.list} renderItem={renders.item}></Pagination>
+      <Pagination
+        list={select.list}
+        renderItem={renders.item}
+        count={select.totalPages}
+        itemsPerPage={select.itemsPerPage}
+        setPage={callbacks.setCurrentPage}
+        setItems={callbacks.setItems}
+        currentPage={select.currentPage}
+      >
+        {" "}
+      </Pagination>
     </PageLayout>
   );
 }

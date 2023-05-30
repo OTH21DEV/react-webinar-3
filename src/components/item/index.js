@@ -28,7 +28,7 @@ console.log(props.dictionary)
       </Link>
       <div className={cn("actions")}>
         <div className={cn("price")}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>{}</button>
+        <button onClick={callbacks.onAdd}>Добавить</button>
       </div>
     </div>
   );

@@ -6,18 +6,29 @@ import "./style.css";
 /**
  * Display pagination
  * @param {Array} list array of all items
- * @param {Function} renderItem function to render the items
+ * @param {Function}  renderItem function to render the items
+ * @param {Number}  count number of total pages (542)
+ * @param {Number}  itemsPerPage number of items per page (10)
+ * @param {Function}  setPage function to set the number of current page
+ * @param {Function}  setItems function to display the items on current page (from API)
+ * @param {Number}  currentPage number of current page (default 1)
  * @returns {HTMLElement}
+ *
  */
-function Pagination({ list, renderItem }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, settemsPerPage] = useState(10);
+function Pagination({ list, renderItem, count, itemsPerPage, setPage, setItems, currentPage }) {
   const [click, setClick] = useState(true);
+
+  const callbacks = {
+    setCurrentPage: (page) => setPage(page),
+    setItems: (limit, skip) => setItems(limit, skip),
+  };
 
   //function for click the numbers
   const handleclick = (e) => {
     if (e.target.id !== "...") {
-      setCurrentPage(+e.target.id);
+      callbacks.setCurrentPage(+e.target.id);
+      let skip = itemsPerPage * (+e.target.id - 1);
+      callbacks.setItems(itemsPerPage, skip);
     }
   };
 
@@ -28,15 +39,11 @@ function Pagination({ list, renderItem }) {
   };
 
   //set the number of pages regarding list length
-  const numberOfPages = Math.ceil(list.length / itemsPerPage);
 
-  //items in a single page
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = list.slice(indexOfFirstItem, indexOfLastItem);
+  const numberOfPages = Math.ceil(count / itemsPerPage);
 
   //Create the array of pages
-  const createPages = () => {
+  const createPages = (currentPage) => {
     const arrayOfPages = [];
     if (numberOfPages <= 3) {
       for (let i = 0; i < numberOfPages; i++) {
@@ -60,9 +67,9 @@ function Pagination({ list, renderItem }) {
 
   return (
     <>
-      <List list={currentItems} renderItem={renderItem} />
+      <List list={list} renderItem={renderItem} />
       <ul className="pageNumbers">
-        {createPages().map((number, index) => {
+        {createPages(currentPage).map((number, index) => {
           return (
             <li key={index} id={number} onClick={click ? (e) => handleclick(e) : disaibleEllipsis(e)} className={currentPage == number ? "active" : null}>
               {number}
@@ -77,5 +84,10 @@ function Pagination({ list, renderItem }) {
 Pagination.prototype = {
   list: propTypes.array.isRequired,
   renderItem: propTypes.func.isRequired,
+  count: propTypes.number.isRequired,
+  itemsPerPage: propTypes.number.isRequired,
+  setPage: propTypes.func.isRequired,
+  setItems: propTypes.func.isRequired,
+  currentPage: propTypes.number.isRequired,
 };
 export default React.memo(Pagination);
