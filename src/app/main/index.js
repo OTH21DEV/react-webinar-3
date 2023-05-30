@@ -27,20 +27,23 @@ function Main() {
     sum: state.basket.sum,
   }));
 
+  const { dictionary } = useContext(LanguageContext);
+  console.log(dictionary)
+
+
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback((_id) => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open("basket"), [store]),
+    
   };
 
-  const { dictionary } = useContext(LanguageContext);
-  console.log(dictionary)
 
   const renders = {
     item: useCallback(
       (item) => {
-        return <Item item={item} onAdd={callbacks.addToBasket} dictionary={dictionary.itemBtn}/>;
+        return <Item item={item} onAdd={callbacks.addToBasket} />;
       },
       [callbacks.addToBasket]
     ),

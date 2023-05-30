@@ -10,7 +10,7 @@ import "./style.css";
 function ItemContent(props) {
   console.log(props);
   const callbacks = {
-    addToBasket: () => props.onAdd(),
+    addToBasket: () => props.onAdd(props.details._id),
   };
 
   return (

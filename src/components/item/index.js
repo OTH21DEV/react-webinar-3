@@ -18,8 +18,9 @@ function Item(props) {
 
   const callbacks = {
     onAdd: (e) => props.onAdd(props.item._id),
+   
   };
-
+console.log(props.dictionary)
   return (
     <div className={cn()}>
       <Link className={cn("title")} to={`articles/${props.item._id}`}>
@@ -27,7 +28,7 @@ function Item(props) {
       </Link>
       <div className={cn("actions")}>
         <div className={cn("price")}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>{props.dictionary}</button>
+        <button onClick={callbacks.onAdd}>{}</button>
       </div>
     </div>
   );

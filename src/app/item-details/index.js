@@ -49,6 +49,7 @@ const ItemDetails = () => {
         </LinkBasketWrapper>
 
         <ItemContent details={select.details} onAdd={callbacks.addToBasket} />
+        
       </PageLayout>
     </>
   );

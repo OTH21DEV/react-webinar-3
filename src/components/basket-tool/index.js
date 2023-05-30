@@ -12,6 +12,7 @@ import "./style.css";
  * @returns {HTMLElement}
  */
 function BasketTool({ sum, amount, onOpen,dictionary }) {
+  console.log(amount)
   const cn = bem("BasketTool");
   return (
     <div className={cn()}>
