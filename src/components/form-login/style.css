@@ -1,0 +1,27 @@
+.Form-wrapper {
+  display: flex;
+  padding: 20px;
+  min-height: 250px;
+}
+
+.Form-wrapper form {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.Form-input {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.Form-btn {
+  width: 70px;
+}
+
+.Form-error-msg {
+  padding: 10px 0px;
+  color: red;
+  font-weight: bold;
+}

@@ -1,0 +1,11 @@
+.Profile-wrapper {
+    display: flex;
+    padding: 20px;
+    min-height: 250px;
+    flex-direction: column;
+  }
+
+  .Profile-title span{
+    font-weight: bold;
+
+  }
