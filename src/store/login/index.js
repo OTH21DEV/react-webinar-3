@@ -12,41 +12,6 @@ class UserState extends StoreModule {
     };
   }
 
-  //   async getTokenFromApi(login, password) {
-
-  //     const rawResponse = await fetch("api/v1/users/sign", {
-  //       //   await fetch("api/v1/users/sign", {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ login: login, password: password }),
-  //     });
-  //     const content = await rawResponse.json();
-  //     if (content) {
-  //       let receivedToken = content.result.token;
-  //       localStorage.setItem("token", `${receivedToken}`);
-
-  //       console.log(receivedToken);
-
-  //       console.log(content);
-
-  //       this.setState({
-  //           ...this.getState(),
-  //           token: content.result.token,
-  //           isLogged:true
-  //         })
-  //     } else {
-
-  //       this.setState({
-  //         ...this.getState(),
-  //         token: '',
-  //         isLogged:false
-  //       })
-  //     }
-  //   }
-
   getTokenFromApi(login, password, navigate) {
     fetch("api/v1/users/sign", {
       method: "POST",
@@ -79,9 +44,6 @@ class UserState extends StoreModule {
             isLogged: true,
           });
         }
-        // if(data.error?.message){
-        //     console.log(data.error.message)
-        // }
       })
 
       .catch((err) => {
@@ -111,10 +73,7 @@ class UserState extends StoreModule {
 
       .then((data) => {
         console.log(data.result);
-        // if (data.result.token) {
-        //   let receivedToken = data.result.token;
-        //   localStorage.setItem("token", `${receivedToken}`);
-        //   navigate(`/profile`);
+
         this.setState({
           ...this.getState(),
           userName: data.result.profile.name,
@@ -123,6 +82,45 @@ class UserState extends StoreModule {
           isLogged: true,
         });
         // }
+      })
+
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  logOut(token) {
+    fetch("api/v1/users/sign", {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-Token": `${token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+          this.setState({
+            ...this.getState(),
+            error: "",
+          });
+        }
+        return response.json();
+      })
+
+      .then((data) => {
+        console.log(data);
+        localStorage.clear();
+
+        this.setState({
+          ...this.getState(),
+          userName: "",
+          phone: "",
+          email: "",
+          isLogged: false,
+          error: "",
+        });
       })
 
       .catch((err) => {

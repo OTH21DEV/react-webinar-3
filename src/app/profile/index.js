@@ -1,4 +1,4 @@
-import { memo, useEffect } from "react";
+import { memo, useEffect,useCallback } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import PageLayout from "../../components/page-layout";
@@ -27,9 +27,17 @@ function Profile() {
     login: state.login,
   }));
 
+  const callbacks = {
+    onSubmit: useCallback((login, password, navigate) => store.actions.login.getTokenFromApi(login, password, navigate), [store]),
+// onLogout:useCallback()=>
+
+onLogOut: useCallback((token) => store.actions.login.logOut(token), [store]),
+   
+  };
   return (
     <PageLayout>
-      <BtnLogin name={select.login.userName}/>
+      <BtnLogin name={select.login.userName} toLogin={'/login'} toProfile={'/profile'} onLogOut={callbacks.onLogOut}/>
+      {/* <NavLogin name={select.login.userName} ></NavLogin> */}
       <Head title={t("title")} />
 
       <Navigation />
