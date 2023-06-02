@@ -21,6 +21,7 @@ function Main() {
   useInit(
     () => {
       store.actions.catalog.initParams();
+      store.actions.categories.getCategoriesFromApi()
     },
     [],
     true

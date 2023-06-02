@@ -1,5 +1,5 @@
 import StoreModule from "../module";
-import { useNavigate } from "react-router-dom";
+
 
 class UserState extends StoreModule {
   initState() {
