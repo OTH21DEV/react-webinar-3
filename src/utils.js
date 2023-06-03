@@ -34,7 +34,11 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
 
-
+/**
+ * Display list array as a tree
+ * @param {Array} list of item's objects
+ * @returns {Array} roots array of nodes 
+ */
 export function listToTree(list) {
   // map will be used to store each object in the "list" array
   const map = {};
@@ -78,6 +82,12 @@ contains all the top-level nodes of the tree structure.
 }
 // console.log(listToTree(select.categories));
 
+/**
+ * Create a prefix 
+ * @param {Array} object roots array containing the nodes
+ * @param {String} prefix 
+ * @returns {Array} array of filtered categories
+ */
 export function setPrefix(object, prefix = "") {
   let result = [];
 
