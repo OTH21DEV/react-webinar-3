@@ -1,4 +1,5 @@
 import StoreModule from "../module";
+import { listToTree,setPrefix } from "../../utils";
 
 class Categories extends StoreModule {
   initState() {
@@ -26,9 +27,13 @@ class Categories extends StoreModule {
       .then((data) => {
         console.log(data.result.items);
 
+        let tree = listToTree(data.result.items)
+        let filteredList = setPrefix(tree)
+        filteredList.unshift({value:'',title:'Все'})
         this.setState({
           ...this.getState(),
-          list: data.result.items,
+          // list: data.result.items,
+          list: filteredList,
         });
       })
 
