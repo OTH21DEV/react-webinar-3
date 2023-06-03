@@ -13,11 +13,10 @@ function CatalogFilter() {
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
     categories: state.categories.list,
-    category:state.catalog.params.category
+    category: state.catalog.params.category,
   }));
 
   console.log(select.categories);
-
 
   const callbacks = {
     // Сортировка
@@ -26,6 +25,8 @@ function CatalogFilter() {
     onSearch: useCallback((query) => store.actions.catalog.setParams({ query, page: 1 }), [store]),
     // Сброс
     onReset: useCallback(() => store.actions.catalog.resetParams(), [store]),
+    //Сортировка по категории
+    onCategory: useCallback((category) => store.actions.catalog.setParams({ category, page: 1 }), [store]),
   };
 
   const options = {
@@ -38,14 +39,14 @@ function CatalogFilter() {
       ],
       []
     ),
-    category:useMemo(()=> select.categories,[select.categories])
+    category: useMemo(() => select.categories, [select.categories]),
   };
 
   const { t } = useTranslate();
 
   return (
     <SideLayout padding="medium">
-       <Select options={options.category} value={select.sort} onChange={callbacks.onSort} />
+      <Select options={options.category} value={select.category} onChange={callbacks.onCategory} />
       <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} />
       <Input value={select.query} onChange={callbacks.onSearch} placeholder={"Поиск"} delay={1000} />
       <button onClick={callbacks.onReset}>{t("filter.reset")}</button>
