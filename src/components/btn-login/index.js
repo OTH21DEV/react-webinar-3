@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo,useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./style.css";
@@ -13,6 +13,10 @@ import { cn as bem } from "@bem-react/classname";
  * @returns {HTMLLinkElement}
  */
 function BtnLogin(props) {
+
+
+  const[errorEmpty, setErrorEmpty]=useState(true)
+
   const cn = bem("Btn");
 
   let navigate = useNavigate();
@@ -22,10 +26,17 @@ function BtnLogin(props) {
   //delete user info with provided token
   const callbacks = {
     logout: (token) => props.onLogOut(token),
+    //test
+    resetError:() => props.onReset()
   };
 
   function handleLogin() {
     navigate(props.toLogin);
+    //test
+    // callbacks.resetError()
+  // if(props.error){
+  //   callbacks.resetError()
+  // }
   }
 
   function handleLogout() {
@@ -38,7 +49,7 @@ function BtnLogin(props) {
         <button onClick={handleLogin}>Вход</button>
       ) : (
         <>
-          <Link>{props.name}</Link>
+          <Link to={props.toProfile}>{props.name}</Link>
           <button onClick={handleLogout}>Выйти</button>
         </>
       )}

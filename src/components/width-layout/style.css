@@ -1,0 +1,18 @@
+.WidthLayout {
+  display: flex;
+}
+.WidthLayout_width_small {
+  width: 157px;
+  margin-right: 5px;
+}
+.WidthLayout_width_medium {
+  width: 308px;
+  margin-right: 5px;
+}
+
+.WidthLayout-item {
+  width: 100%;
+}
+.WidthLayout-item input {
+  width: 100%;
+}

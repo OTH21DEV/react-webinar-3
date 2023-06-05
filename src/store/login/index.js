@@ -1,6 +1,5 @@
 import StoreModule from "../module";
 
-
 class UserState extends StoreModule {
   initState() {
     return {
@@ -22,12 +21,13 @@ class UserState extends StoreModule {
       body: JSON.stringify({ login: login, password: password }),
     })
       .then((response) => {
-        console.log(response);
         if (!response.ok) {
-          this.setState({
-            ...this.getState(),
-            error: "Неверное имя пользователя или пароль",
-          });
+          return response.json().then((response) =>
+            this.setState({
+              ...this.getState(),
+              error: response.error.data.issues[0].message,
+            })
+          );
         }
         return response.json();
       })
@@ -51,6 +51,13 @@ class UserState extends StoreModule {
       });
   }
 
+  resetError() {
+    this.setState({
+      ...this.getState(),
+      error: "",
+    });
+  }
+  
   getUserDataFromApi(token) {
     fetch("api/v1/users/self", {
       method: "GET",
@@ -65,7 +72,8 @@ class UserState extends StoreModule {
         if (!response.ok) {
           this.setState({
             ...this.getState(),
-            error: "Неверное имя пользователя или пароль",
+            // error: response.error.data.issues[0].message,
+            error: "",
           });
         }
         return response.json();

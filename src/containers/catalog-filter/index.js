@@ -5,6 +5,8 @@ import useSelector from "../../hooks/use-selector";
 import Select from "../../components/select";
 import Input from "../../components/input";
 import SideLayout from "../../components/side-layout";
+import widthLayout from "../../components/width-layout";
+import WidthLayout from "../../components/width-layout";
 
 function CatalogFilter() {
   const store = useStore();
@@ -48,7 +50,9 @@ function CatalogFilter() {
     <SideLayout padding="medium">
       <Select options={options.category} value={select.category} onChange={callbacks.onCategory} />
       <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} />
+      <WidthLayout width="medium">
       <Input value={select.query} onChange={callbacks.onSearch} placeholder={"Поиск"} delay={1000} />
+      </WidthLayout>
       <button onClick={callbacks.onReset}>{t("filter.reset")}</button>
     </SideLayout>
   );

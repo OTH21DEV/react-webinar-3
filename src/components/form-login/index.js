@@ -23,14 +23,25 @@ function FormLogin(props) {
   ////get token from API
   const callbacks = {
     onSubmit: (login, password, navigate) => props.onSubmit(login, password, navigate),
+    resetError:() => props.onReset()
   };
 
   function handleForm(e) {
     e.preventDefault();
     callbacks.onSubmit(user.login, user.password, navigate);
+    //test
+    callbacks.resetError()
+   
+    
   }
+
+  function test(){
+    callbacks.resetError()
+  }
+
   return (
     <div className={cn("wrapper")}>
+      {/* <form onSubmit={(e) => handleForm(e)}> */}
       <form onSubmit={(e) => handleForm(e)}>
         <h2>Вход</h2>
         <div className={cn("input")}>
@@ -44,6 +55,7 @@ function FormLogin(props) {
         </div>
 
         {props.error ? <span className={cn("error-msg")}>{props.error}</span> : ""}
+    
         <button className={cn("btn")}>Войти</button>
       </form>
     </div>

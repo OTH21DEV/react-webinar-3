@@ -33,13 +33,15 @@ function Profile() {
     onSubmit: useCallback((login, password, navigate) => store.actions.login.getTokenFromApi(login, password, navigate), [store]),
     //delete user info on logout
     onLogOut: useCallback((token) => store.actions.login.logOut(token), [store]),
+      //reset error 
+      onReset: useCallback(()=>store.actions.login.resetError(),[store])
   };
   return (
     <PageLayout>
-      <BtnLogin name={select.login.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} />
+      <BtnLogin name={select.login.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} onReset={callbacks.onReset} profile={select.login} />
       <Head title={t("title")} />
       <Navigation />
-      <ProfileDetails profile={select.login} />
+      <ProfileDetails profile={select.login}  />
     </PageLayout>
   );
 }

@@ -1,3 +1,6 @@
+import React from 'react'
+import { Outlet,Navigate } from 'react-router-dom';
+
 /**
  * Плюрализация
  * Возвращает вариант с учётом правил множественного числа под указанную локаль
@@ -110,7 +113,7 @@ The resulting array of strings and objects returned from this recursive call
 is spread into the result array
 */
     if (i.children !== undefined) {
-      result.push(...setPrefix(i.children, `${prefix}-`));
+      result.push(...setPrefix(i.children, `${prefix}- `));
     } else {
       /*
     

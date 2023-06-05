@@ -10,6 +10,7 @@ import Navigation from "../../containers/navigation";
 import Spinner from "../../components/spinner";
 import ArticleCard from "../../components/article-card";
 import LocaleSelect from "../../containers/locale-select";
+import BtnLogin from '../../components/btn-login';
 
 function Article() {
   const store = useStore();
@@ -35,6 +36,7 @@ function Article() {
 
   return (
     <PageLayout>
+        <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} onReset={callbacks.onReset} profile={select.login} ></BtnLogin>
       <Head title={select.article.title}>
         <LocaleSelect/>
       </Head>

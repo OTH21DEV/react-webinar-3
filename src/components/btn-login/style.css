@@ -2,8 +2,14 @@
   display: flex;
   justify-content: end;
   padding: 10px 20px;
+  border-bottom: 1px solid #DCDCDC;
+ 
 }
 
+.Btn-login button{
+  border:1px solid #767676;
+  border-radius: 2px;
+}
 .Btn-login a {
   color: #8fcaf5;
   padding-right: 15px;
