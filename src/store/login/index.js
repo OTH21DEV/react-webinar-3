@@ -10,6 +10,12 @@ class UserState extends StoreModule {
       email: "",
     };
   }
+  resetError() {
+    this.setState({
+      ...this.getState(),
+      error: "",
+    });
+  }
 
   getTokenFromApi(login, password, navigate) {
     fetch("api/v1/users/sign", {
@@ -22,6 +28,7 @@ class UserState extends StoreModule {
     })
       .then((response) => {
         if (!response.ok) {
+          console.log(this.getState().count);
           return response.json().then((response) =>
             this.setState({
               ...this.getState(),
@@ -29,6 +36,7 @@ class UserState extends StoreModule {
             })
           );
         }
+
         return response.json();
       })
 
@@ -51,13 +59,6 @@ class UserState extends StoreModule {
       });
   }
 
-  resetError() {
-    this.setState({
-      ...this.getState(),
-      error: "",
-    });
-  }
-  
   getUserDataFromApi(token) {
     fetch("api/v1/users/self", {
       method: "GET",

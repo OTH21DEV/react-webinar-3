@@ -1,4 +1,4 @@
-import { memo, useCallback,useEffect } from "react";
+import { memo, useCallback, useEffect } from "react";
 import BtnLogin from "../../components/btn-login";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
@@ -7,14 +7,15 @@ import Navigation from "../../containers/navigation";
 import FormLogin from "../../components/form-login";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
+//test
+
+import useInit from "../../hooks/use-init";
 
 /**
  * Display login page
  * @returns {HTMLElement}
  */
 function Login() {
-
-  
   const { t } = useTranslate();
   const store = useStore();
 
@@ -23,24 +24,28 @@ function Login() {
     userName: state.login.userName,
   }));
 
+  useInit(
+    () => {
+      store.actions.login.resetError();
+    },
+    [],
+    true
+  );
 
   const callbacks = {
     //get token from API
     onSubmit: useCallback((login, password, navigate) => store.actions.login.getTokenFromApi(login, password, navigate), [store]),
     //delete user info on logout
     onLogOut: useCallback((token) => store.actions.login.logOut(token), [store]),
-    //test
-
-      //reset error 
-      onReset: useCallback(()=>store.actions.login.resetError(),[store])
+    
   };
 
   return (
     <PageLayout>
-      <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} onReset={callbacks.onReset} profile={select.login} />
+      <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} />
       <Head title={t("title")} />
       <Navigation />
-      <FormLogin onSubmit={callbacks.onSubmit} error={select.error} onReset={callbacks.onReset}/>
+      <FormLogin onSubmit={callbacks.onSubmit} error={select.error} />
     </PageLayout>
   );
 }

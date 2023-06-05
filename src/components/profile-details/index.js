@@ -39,7 +39,7 @@ ProfileDetails.propTypes = {
         userName: PropTypes.string,
         phone: PropTypes.string,
         email: PropTypes.string,
-      }).isRequired
+      })
     ),
   };
 export default memo(ProfileDetails);

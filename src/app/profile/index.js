@@ -7,6 +7,7 @@ import BtnLogin from "../../components/btn-login";
 import useSelector from "../../hooks/use-selector";
 import useStore from "../../hooks/use-store";
 import ProfileDetails from "../../components/profile-details";
+import useInit from "../../hooks/use-init";
 
 /**
  * Display user profile page
@@ -23,9 +24,13 @@ function Profile() {
       store.actions.login.getUserDataFromApi(tokenInLocalStorage);
     }
   }, [tokenInLocalStorage]);
+
+
   const select = useSelector((state) => ({
-    error: state.login.error,
-    login: state.login,
+    // error: state.login.error,
+    userName:state.login.userName,
+    profile: state.login,
+
   }));
 
   const callbacks = {
@@ -33,15 +38,14 @@ function Profile() {
     onSubmit: useCallback((login, password, navigate) => store.actions.login.getTokenFromApi(login, password, navigate), [store]),
     //delete user info on logout
     onLogOut: useCallback((token) => store.actions.login.logOut(token), [store]),
-      //reset error 
-      onReset: useCallback(()=>store.actions.login.resetError(),[store])
+    
   };
   return (
     <PageLayout>
-      <BtnLogin name={select.login.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} onReset={callbacks.onReset} profile={select.login} />
+      <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} />
       <Head title={t("title")} />
       <Navigation />
-      <ProfileDetails profile={select.login}  />
+      <ProfileDetails profile={select.profile}  />
     </PageLayout>
   );
 }

@@ -1,9 +1,11 @@
-import { memo,useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { memo, useState } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./style.css";
 import { cn as bem } from "@bem-react/classname";
-
+//test
+import useStore from "../../hooks/use-store";
+import useSelector from "../../hooks/use-selector";
 
 /**
  * Display login btn and link
@@ -13,10 +15,6 @@ import { cn as bem } from "@bem-react/classname";
  * @returns {HTMLLinkElement}
  */
 function BtnLogin(props) {
-
-
-  const[errorEmpty, setErrorEmpty]=useState(true)
-
   const cn = bem("Btn");
 
   let navigate = useNavigate();
@@ -26,17 +24,11 @@ function BtnLogin(props) {
   //delete user info with provided token
   const callbacks = {
     logout: (token) => props.onLogOut(token),
-    //test
-    resetError:() => props.onReset()
+  
   };
 
   function handleLogin() {
     navigate(props.toLogin);
-    //test
-    // callbacks.resetError()
-  // if(props.error){
-  //   callbacks.resetError()
-  // }
   }
 
   function handleLogout() {
@@ -58,11 +50,12 @@ function BtnLogin(props) {
 }
 
 BtnLogin.propTypes = {
-  props: PropTypes.objectOf(PropTypes.shape({
-    onLogOut: PropTypes.func,
-    toLogin: PropTypes.string,
-    name: PropTypes.string,
-  }).isRequired),
- 
-}
+  props: PropTypes.objectOf(
+    PropTypes.shape({
+      onLogOut: PropTypes.func,
+      toLogin: PropTypes.string,
+      name: PropTypes.string,
+    }).isRequired
+  ),
+};
 export default memo(BtnLogin);
