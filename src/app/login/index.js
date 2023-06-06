@@ -21,28 +21,35 @@ function Login() {
 
   const select = useSelector((state) => ({
     error: state.login.error,
-    userName: state.login.userName,
+    // userName: state.login.userName,
+    //test
+    userName: state.auth.userName,
   }));
+
+  const tokenInLocalStorage = localStorage.getItem("token");
 
   useInit(
     () => {
-      store.actions.login.resetError();
+      if (tokenInLocalStorage) {
+        store.actions.login.getUserDataFromApi(tokenInLocalStorage);
+        // store.actions.auth.getAuthStatus(tokenInLocalStorage);
+      }
     },
-    [],
+    [tokenInLocalStorage],
     true
   );
-
+  console.log(tokenInLocalStorage)
   const callbacks = {
     //get token from API
     onSubmit: useCallback((login, password, navigate) => store.actions.login.getTokenFromApi(login, password, navigate), [store]),
     //delete user info on logout
     onLogOut: useCallback((token) => store.actions.login.logOut(token), [store]),
-    
+    onReset: useCallback(() => store.actions.auth.resetState(), [store]),
   };
 
   return (
     <PageLayout>
-      <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} />
+      <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} onReset={callbacks.onReset} />
       <Head title={t("title")} />
       <Navigation />
       <FormLogin onSubmit={callbacks.onSubmit} error={select.error} />

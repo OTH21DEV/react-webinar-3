@@ -19,18 +19,30 @@ function Profile() {
 
   const store = useStore();
 
-  useEffect(() => {
-    if (tokenInLocalStorage) {
-      store.actions.login.getUserDataFromApi(tokenInLocalStorage);
-    }
-  }, [tokenInLocalStorage]);
+  // useEffect(() => {
+  //   if (tokenInLocalStorage) {
+  //     store.actions.login.getUserDataFromApi(tokenInLocalStorage);
+  //   }
+  // }, [tokenInLocalStorage]);
+
+  // test
+  useInit(
+    () => {
+      if (tokenInLocalStorage) {
+        store.actions.login.getUserDataFromApi(tokenInLocalStorage);
+        // store.actions.auth.getAuthStatus(tokenInLocalStorage);
+      }
+    },
+    [tokenInLocalStorage],
+    true
+  );
+  console.log(tokenInLocalStorage)
 
 
   const select = useSelector((state) => ({
     // error: state.login.error,
-    userName:state.login.userName,
+    userName: state.login.userName,
     profile: state.login,
-
   }));
 
   const callbacks = {
@@ -38,14 +50,14 @@ function Profile() {
     onSubmit: useCallback((login, password, navigate) => store.actions.login.getTokenFromApi(login, password, navigate), [store]),
     //delete user info on logout
     onLogOut: useCallback((token) => store.actions.login.logOut(token), [store]),
-    
+    onReset: useCallback(() => store.actions.auth.resetState(), [store]),
   };
   return (
     <PageLayout>
-      <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} />
+      <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} onReset={callbacks.onReset}  />
       <Head title={t("title")} />
       <Navigation />
-      <ProfileDetails profile={select.profile}  />
+      <ProfileDetails profile={select.profile} />
     </PageLayout>
   );
 }

@@ -38,7 +38,7 @@ class Categories extends StoreModule {
       })
 
       .catch((err) => {
-        console.log(err.message);
+        console.log(err);
       });
   }
 }

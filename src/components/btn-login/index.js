@@ -24,7 +24,7 @@ function BtnLogin(props) {
   //delete user info with provided token
   const callbacks = {
     logout: (token) => props.onLogOut(token),
-  
+    onReset:()=>props.onReset()
   };
 
   function handleLogin() {
@@ -34,6 +34,7 @@ function BtnLogin(props) {
   function handleLogout() {
     navigate(props.toLogin);
     callbacks.logout(tokenInLocalStorage);
+    callbacks.onReset();
   }
   return (
     <div className={cn("login")}>

@@ -17,6 +17,52 @@ class UserState extends StoreModule {
     });
   }
 
+  // getTokenFromApi(login, password, navigate) {
+  //   fetch("api/v1/users/sign", {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ login: login, password: password }),
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         console.log(this.getState().count);
+  //         return response.json().then((response) =>
+  //           this.setState({
+  //             ...this.getState(),
+  //             error: response.error.data.issues[0].message,
+  //           })
+  //         );
+  //       }
+
+  //       return response.json();
+  //     })
+
+  //     .then((data) => {
+  //       // console.log(data.result.token);
+  //       if (data.result.token) {
+  //         let receivedToken = data.result.token;
+  //         localStorage.setItem("token", `${receivedToken}`);
+  //         navigate(`/profile`);
+  //         this.setState({
+  //           ...this.getState(),
+  //           // token: data.result.token,
+  //           isLogged: true,
+  //         });
+  //       }
+  //     })
+
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
+
+
+  //test
+
+
   getTokenFromApi(login, password, navigate) {
     fetch("api/v1/users/sign", {
       method: "POST",
@@ -26,37 +72,37 @@ class UserState extends StoreModule {
       },
       body: JSON.stringify({ login: login, password: password }),
     })
-      .then((response) => {
+      .then(async (response) => {
         if (!response.ok) {
-          console.log(this.getState().count);
-          return response.json().then((response) =>
-            this.setState({
-              ...this.getState(),
-              error: response.error.data.issues[0].message,
-            })
-          );
+         
+          const response_1 = await response.json();
+          return this.setState({
+            ...this.getState(),
+            error: response_1.error.data.issues[0].message,
+          });
         }
 
         return response.json();
       })
 
       .then((data) => {
-        console.log(data.result.token);
+        console.log(data);
         if (data.result.token) {
           let receivedToken = data.result.token;
           localStorage.setItem("token", `${receivedToken}`);
           navigate(`/profile`);
           this.setState({
             ...this.getState(),
-            token: data.result.token,
+            // token: data.result.token,
             isLogged: true,
           });
         }
       })
 
       .catch((err) => {
-        console.log(err.message);
+        console.log(err);
       });
+  
   }
 
   getUserDataFromApi(token) {
@@ -81,20 +127,21 @@ class UserState extends StoreModule {
       })
 
       .then((data) => {
-        console.log(data.result);
-
+        console.log(data);
+if(data){
         this.setState({
           ...this.getState(),
           userName: data.result.profile.name,
           phone: data.result.profile.phone,
           email: data.result.email,
           isLogged: true,
+          error: "",
         });
-        // }
+        }
       })
 
       .catch((err) => {
-        console.log(err.message);
+        console.log(err);
       });
   }
 
@@ -133,7 +180,7 @@ class UserState extends StoreModule {
       })
 
       .catch((err) => {
-        console.log(err.message);
+        console.log(err);
       });
   }
 }

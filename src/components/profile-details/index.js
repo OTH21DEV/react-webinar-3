@@ -11,6 +11,7 @@ import { cn as bem } from "@bem-react/classname";
  * @returns {HTMLElement}
  */
 function ProfileDetails({ profile }) {
+  console.log(profile)
   const cn = bem("Profile");
   return (
     <div className={cn("wrapper")}>
