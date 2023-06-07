@@ -1,11 +1,8 @@
-import { memo, useState } from "react";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { memo } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./style.css";
 import { cn as bem } from "@bem-react/classname";
-//test
-import useStore from "../../hooks/use-store";
-import useSelector from "../../hooks/use-selector";
 
 /**
  * Display login btn and link
@@ -19,12 +16,9 @@ function BtnLogin(props) {
 
   let navigate = useNavigate();
 
-  const tokenInLocalStorage = localStorage.getItem("token");
-
   //delete user info with provided token
   const callbacks = {
-    logout: (token) => props.onLogOut(token),
-    onReset:()=>props.onReset()
+    logout: () => props.onLogOut(),
   };
 
   function handleLogin() {
@@ -33,8 +27,7 @@ function BtnLogin(props) {
 
   function handleLogout() {
     navigate(props.toLogin);
-    callbacks.logout(tokenInLocalStorage);
-    callbacks.onReset();
+    callbacks.logout();
   }
   return (
     <div className={cn("login")}>

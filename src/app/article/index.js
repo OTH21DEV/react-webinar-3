@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useEffect } from "react";
+import { memo, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
@@ -25,7 +25,7 @@ function Article() {
   const select = useSelector((state) => ({
     article: state.article.data,
     waiting: state.article.waiting,
-    userName: state.login.userName,
+    userName: state.auth.user.name,
   }));
 
   console.log(select);
@@ -34,19 +34,14 @@ function Article() {
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback((_id) => store.actions.basket.addToBasket(_id), [store]),
-    //test
-    //get token from API
-    onSubmit: useCallback((login, password, navigate) => store.actions.login.getTokenFromApi(login, password, navigate), [store]),
+
     //delete user info on logout
-    onLogOut: useCallback((token) => store.actions.login.logOut(token), [store]),
-    //reset error
-    onReset: useCallback(() => store.actions.login.resetError(), [store]),
+    onLogOut: useCallback(() => store.actions.auth.logOut(), [store]),
   };
 
   return (
     <PageLayout>
       <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut}></BtnLogin>
-      {/* <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} onReset={callbacks.onReset} profile={select.login} ></BtnLogin> */}
       <Head title={select.article.title}>
         <LocaleSelect />
       </Head>

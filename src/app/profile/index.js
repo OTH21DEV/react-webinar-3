@@ -1,4 +1,4 @@
-import { memo, useEffect, useCallback } from "react";
+import { memo,useCallback } from "react";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import Navigation from "../../containers/navigation";
@@ -14,47 +14,29 @@ import useInit from "../../hooks/use-init";
  * @returns {HTMLElement}
  */
 function Profile() {
-  const tokenInLocalStorage = localStorage.getItem("token");
   const { t } = useTranslate();
 
   const store = useStore();
 
-  // useEffect(() => {
-  //   if (tokenInLocalStorage) {
-  //     store.actions.login.getUserDataFromApi(tokenInLocalStorage);
-  //   }
-  // }, [tokenInLocalStorage]);
-
-  // test
   useInit(
     () => {
-      if (tokenInLocalStorage) {
-        store.actions.login.getUserDataFromApi(tokenInLocalStorage);
-        // store.actions.auth.getAuthStatus(tokenInLocalStorage);
-      }
+      store.actions.profile.getUserDataFromApi();
     },
-    [tokenInLocalStorage],
+    [],
     true
   );
-  console.log(tokenInLocalStorage)
-
 
   const select = useSelector((state) => ({
-    // error: state.login.error,
-    userName: state.login.userName,
-    profile: state.login,
+    userName: state.auth.user.name,
+    profile: state.profile.userProfile,
   }));
 
   const callbacks = {
-    //get token from API
-    onSubmit: useCallback((login, password, navigate) => store.actions.login.getTokenFromApi(login, password, navigate), [store]),
-    //delete user info on logout
-    onLogOut: useCallback((token) => store.actions.login.logOut(token), [store]),
-    onReset: useCallback(() => store.actions.auth.resetState(), [store]),
+    onLogOut: useCallback(() => store.actions.auth.logOut(), [store]),
   };
   return (
     <PageLayout>
-      <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} onReset={callbacks.onReset}  />
+      <BtnLogin name={select.userName} toLogin={"/login"} toProfile={"/profile"} onLogOut={callbacks.onLogOut} />
       <Head title={t("title")} />
       <Navigation />
       <ProfileDetails profile={select.profile} />

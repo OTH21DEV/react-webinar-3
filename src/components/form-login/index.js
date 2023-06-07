@@ -1,4 +1,4 @@
-import { memo, useState, useEffect } from "react";
+import { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { cn as bem } from "@bem-react/classname";
 import PropTypes from "prop-types";
@@ -20,14 +20,15 @@ function FormLogin(props) {
     password: "",
   });
 
-  ////get token from API
+  //get token from API
   const callbacks = {
-    onSubmit: (login, password, navigate) => props.onSubmit(login, password, navigate),
+    onSubmit: (login, password) => props.onSubmit(login, password),
   };
 
   function handleForm(e) {
     e.preventDefault();
-    callbacks.onSubmit(user.login, user.password, navigate);
+    callbacks.onSubmit(user.login, user.password);
+    navigate("/profile");
   }
 
   return (
