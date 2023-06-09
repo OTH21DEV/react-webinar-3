@@ -7,43 +7,59 @@ import { useDispatch, useSelector as useSelectorRedux } from "react-redux";
 import { postComment } from "../../store-redux/comments/actions";
 import commentAction from "../../store-redux/comments/actions";
 
-function Comment({ session, article }) {
+function Comment({ session, article, comments }) {
   const dispatch = useDispatch();
 
-  const select = useSelectorRedux(
-    (state) => ({
-      article: state.article.data,
-      waiting: state.article.waiting,
-    }),
-    shallowequal
-  );
+  //   const select = useSelectorRedux(
+  //     (state) => ({
+  //       article: state.article.data,
+  //       waiting: state.article.waiting,
+  //     }),
+  //     shallowequal
+  //   );
 
   const [text, setText] = useState("");
-  console.log(text);
 
-  console.log(select.article);
+  console.log(comments);
 
   function handleClick(e) {
     e.preventDefault();
 
-    dispatch(postComment(text, select.article._id, select.article._type));
+    dispatch(postComment(text, article._id, article._type));
   }
 
   const cn = bem("Comment");
+
   return session.exists ? (
-    <div className={cn("wrapper")}>
-      <div>
-        <h1 className={cn("title")}>Комментарии</h1>
-        <span></span>
-      </div>
-      <div className={cn("input")}>
-        <h2>Новый комментарий</h2>
+    <>
+      {/* {comments &&
+        comments.map((comment, index) => {
+          return (
+            <div>
+              <div key={index} className={cn("title")}>
+                <h4>{session.user.profile.name}</h4>
+                <p>{comment.dateCreate}</p>
+              </div>
+              <p>{comment.text}</p>
+              <button>Ответить</button>
+            </div>
+          );
+        })} */}
 
-        <input value={text} type="text" onChange={(e) => setText(e.target.value)} />
+      <div className={cn("wrapper")}>
+        <div>
+          <h1 className={cn("title")}>Комментарии</h1>
+          <span>{`(${comments?.length})`}</span>
+        </div>
+        <div className={cn("input")}>
+          <h2>Новый комментарий</h2>
 
-        <button onClick={(e) => handleClick(e)}>Отправить</button>
+          <input value={text} type="text" onChange={(e) => setText(e.target.value)} />
+
+          <button onClick={(e) => handleClick(e)}>Отправить</button>
+        </div>
       </div>
-    </div>
+    </>
   ) : (
     <div className={cn("wrapper")}>
       <div>
