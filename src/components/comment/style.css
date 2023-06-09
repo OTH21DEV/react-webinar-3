@@ -1,0 +1,44 @@
+.Comment-wrapper{
+    padding:20px 40px
+}
+
+.Comment-title{
+    font-size:1.2em
+}
+
+.Comment-input {
+   display:flex;
+   flex-direction: column;
+}
+.Comment-input h2{
+    font-size:0.9em;
+    padding-top:30px 
+}
+
+.Comment-input input{
+  height:76px;
+  display:flex;
+  border :1px solid #666666;
+  border-radius: 4px;
+ 
+ }
+ .Comment-input input::placeholder{
+   position:absolute;
+   top:0;
+   padding:5px;
+   text-align: top;
+   } 
+
+ 
+  
+ .Comment-input button{
+   width:90px;
+   height:21px;
+   margin:5px 0px
+   }
+  
+   .Comment-login span{
+    color: #0087E9;
+    text-decoration-line: underline;
+    cursor: pointer;
+   }

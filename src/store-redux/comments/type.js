@@ -1,0 +1,3 @@
+// export const CHECK_LOGIN_SUCCESS = "CHECK_LOGIN_SUCCESS ";
+export const CREATE_COMMENT = "CREATE_COMMENT";
+export const GET_COMMENTS = "GET_COMMENTS";
