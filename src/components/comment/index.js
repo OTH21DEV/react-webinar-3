@@ -29,13 +29,14 @@ function Comment({ session, article, comments }) {
     setId(e.currentTarget.id);
   }
 
+  console.log(comments)
   return (
     <>
       <div className={cn("heading")}>
         <h1>
           Комментарии<span> {`(${comments?.length})`}</span>
         </h1>
-        {/* <div>{`(${comments?.length})`}</div> */}
+    
       </div>
 
       {comments &&
@@ -43,8 +44,8 @@ function Comment({ session, article, comments }) {
           return (
             <div key={index} className={cn("wrapper")}>
               <div className={cn("title")}>
-                {/* <h4>{session?.user.profile.name}</h4> */}
-                {/* <h4>{session.exists && session?.user.profile.name}</h4> */}
+                <h4>{comment.author.profile.name}</h4>
+             
                 <p>{formatDate(comment.dateCreate)}</p>
               </div>
               <div>

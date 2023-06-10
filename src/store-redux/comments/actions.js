@@ -57,7 +57,7 @@ export const receiveComments = (parentId) => {
     try {
       //=items(_id,text,dateCreate,author(profile(name)),parent(_id,_type))
       const res = await services.api.request({
-        url: `api/v1/comments?search[parent]=${parentId}&limit=*&fields=*`,
+        url: `api/v1/comments?search[parent]=${parentId}&limit=*&fields=items(_id,text,dateCreate,author(profile(name)),parent(_id,_type))`,
 
         headers: {
           Accept: "application/json",
