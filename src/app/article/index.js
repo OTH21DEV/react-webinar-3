@@ -16,7 +16,6 @@ import shallowequal from "shallowequal";
 import articleActions from "../../store-redux/article/actions";
 
 import Comment from "../../components/comment";
-import Comments from "../../components/comments";
 
 import useSelectorStore from "../../hooks/use-selector";
 import { receiveComments } from "../../store-redux/comments/actions";
@@ -52,32 +51,7 @@ function Article() {
     addToBasket: useCallback((_id) => store.actions.basket.addToBasket(_id), [store]),
   };
 
-  console.log(select.comments);
-
-  function test(comments) {
-    const root = { _id: null, children: [] };
-    const commentsById = {};
-
-    comments &&
-      comments.forEach((comment) => {
-        commentsById[comment._id] = comment;
-        comment.children = [];
-      });
-
-    comments &&
-      comments.forEach((comment) => {
-        const parent = commentsById[comment.parent._id] || root;
-        parent.children.push(comment);
-      });
-    return root.children;
-  }
-
-  console.log(test(select.comments));
-
-  let filtered = test(select.comments);
-
-  // let newArr = treeToList(filtered, (item, level));
-  // console.log(newArr);
+  console.log(select.article);
 
   const userAuth = useSelectorStore((state) => ({
     session: state.session,
@@ -94,7 +68,6 @@ function Article() {
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t} />
       </Spinner>
       <Comment session={userAuth.session} articleId={params.id} article={select.article} comments={select.comments}></Comment>
-      <Comments session={userAuth.session} articleId={params.id} article={select.article} comments={filtered}></Comments>
     </PageLayout>
   );
 }

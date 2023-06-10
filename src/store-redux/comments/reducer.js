@@ -24,22 +24,3 @@ const reducer = (state = initialState, action) => {
 
 export default reducer;
 
-// Начальное состояние
-// const initialState = {
-//   data: {},
-//   waiting: false, // признак ожидания загрузки
-// };
-
-// // Обработчик действий
-// function reducer(state = initialState, action) {
-//   switch (action.type) {
-//     case "comment/create":
-//       return { ...state, data: action.payload.data, waiting: false };
-
-//     default:
-//       // Нет изменений
-//       return state;
-//   }
-// }
-
-// export default reducer;

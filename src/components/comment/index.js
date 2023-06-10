@@ -1,4 +1,5 @@
 import { memo, useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { cn as bem } from "@bem-react/classname";
 import shallowequal from "shallowequal";
@@ -6,21 +7,14 @@ import "./style.css";
 import { useDispatch, useSelector as useSelectorRedux } from "react-redux";
 import { postComment } from "../../store-redux/comments/actions";
 import commentAction from "../../store-redux/comments/actions";
+import formatDate from "../../utils/format-date";
 
 function Comment({ session, article, comments }) {
   const dispatch = useDispatch();
 
-  //   const select = useSelectorRedux(
-  //     (state) => ({
-  //       article: state.article.data,
-  //       waiting: state.article.waiting,
-  //     }),
-  //     shallowequal
-  //   );
-
   const [text, setText] = useState("");
-
-  console.log(comments);
+  const [isClicked, setIsClicked] = useState(false);
+  const [id, setId] = useState("");
 
   function handleClick(e) {
     e.preventDefault();
@@ -30,48 +24,92 @@ function Comment({ session, article, comments }) {
 
   const cn = bem("Comment");
 
-  return session.exists ? (
+  function login(e) {
+    setIsClicked(true);
+    setId(e.currentTarget.id);
+  }
+
+  return (
     <>
-      {/* {comments &&
+      <div className={cn("heading")}>
+        <h1>
+          Комментарии<span> {`(${comments?.length})`}</span>
+        </h1>
+        {/* <div>{`(${comments?.length})`}</div> */}
+      </div>
+
+      {comments &&
         comments.map((comment, index) => {
           return (
-            <div>
-              <div key={index} className={cn("title")}>
-                <h4>{session.user.profile.name}</h4>
-                <p>{comment.dateCreate}</p>
+            <div key={index} className={cn("wrapper")}>
+              <div className={cn("title")}>
+                {/* <h4>{session?.user.profile.name}</h4> */}
+                {/* <h4>{session.exists && session?.user.profile.name}</h4> */}
+                <p>{formatDate(comment.dateCreate)}</p>
               </div>
-              <p>{comment.text}</p>
-              <button>Ответить</button>
+              <div>
+                <p className={cn("text")}>{comment.text}</p>
+                <a
+                  className={cn("response-btn")}
+                  onClick={(e) => {
+                    login(e);
+                  }}
+                  id={comment._id}
+                >
+                  Ответить
+                </a>
+                {id == comment._id && !session.exists && (
+                  <div>
+                    <p className={cn("login")}>
+                      <Link to={"/login"} className={cn("write")}>
+                        Войдите
+                      </Link>
+                      , чтобы иметь возможность комментировать
+                      <a href={`/articles/${article._id}`} className={cn("cancel")}>
+                        Отмена
+                      </a>
+                    </p>
+                  </div>
+                )}
+
+                {id == comment._id && session.exists && (
+                  <div className={cn("input")}>
+                    <h2>Новый ответ</h2>
+
+                    <input value={text} type="text" onChange={(e) => setText(e.target.value)} />
+                    <div>
+                      <button className={cn("send-btn")}>Отправить</button>
+                      <button>Отмена</button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           );
-        })} */}
+        })}
 
-      <div className={cn("wrapper")}>
-        <div>
-          <h1 className={cn("title")}>Комментарии</h1>
-          <span>{`(${comments?.length})`}</span>
-        </div>
+      {session.exists && !isClicked &&(
         <div className={cn("input")}>
           <h2>Новый комментарий</h2>
 
           <input value={text} type="text" onChange={(e) => setText(e.target.value)} />
-
-          <button onClick={(e) => handleClick(e)}>Отправить</button>
+          <div>
+            <button>Отправить</button>
+          </div>
         </div>
-      </div>
+      )}
+
+      {!session.exists && (
+        <div className={cn("wrapper-login")}>
+          <p className={cn("login")}>
+            <Link to={"/login"} className={cn("write")}>
+              Войдите
+            </Link>
+            , чтобы иметь возможность комментировать
+          </p>
+        </div>
+      )}
     </>
-  ) : (
-    <div className={cn("wrapper")}>
-      <div>
-        <h1 className={cn("title")}>Комментарии</h1>
-        <span></span>
-      </div>
-      <div>
-        <p className={cn("login")}>
-          <span>Войдите</span>, чтобы иметь возможность комментировать
-        </p>
-      </div>
-    </div>
   );
 }
 

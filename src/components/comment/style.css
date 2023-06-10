@@ -9,6 +9,9 @@
 .Comment-input {
   display: flex;
   flex-direction: column;
+  padding-left:40px;
+  padding-right:40px;
+  padding-bottom:60px;
 }
 .Comment-input h2 {
   font-size: 0.9em;
@@ -31,7 +34,7 @@
 .Comment-input button {
   width: 90px;
   height: 21px;
-  margin: 5px 0px;
+  /* margin: 5px 0px; */
 }
 
 .Comment-login span {
@@ -39,3 +42,54 @@
   text-decoration-line: underline;
   cursor: pointer;
 }
+.Comment-title p {
+  color: #666666;
+  padding-left: 10px;
+  font-size: 0.8em;
+}
+
+.Comment-text {
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 0.8em;
+}
+.Comment-response-btn {
+  color: #0087e9;
+  text-decoration: none;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.Comment-heading {
+  display: flex;
+  align-items: center;
+
+  font-size: 0.7em;
+
+  padding: 0px 40px;
+}
+.Comment-write {
+  color: #0087e9;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+.Comment-cancel {
+  color: #666666;
+  text-decoration-line: underline;
+  cursor: pointer;
+  padding-left: 10px;
+}
+.Comment-wrapper-login {
+  padding-left: 40px;
+  padding-bottom: 60px;
+}
+.Comment-send-btn {
+ 
+    margin-right:10px
+  }
+  
+  .Comment-input div {
+ 
+    margin-top:10px
+  }
+  
