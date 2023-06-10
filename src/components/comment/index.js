@@ -16,10 +16,10 @@ function Comment({ session, article, comments }) {
   const [isClicked, setIsClicked] = useState(false);
   const [id, setId] = useState("");
 
-  function handleClick(e) {
+  function handleClick(e,id,type) {
     e.preventDefault();
 
-    dispatch(postComment(text, article._id, article._type));
+    dispatch(postComment(text, id, type));
   }
 
   const cn = bem("Comment");
@@ -29,23 +29,22 @@ function Comment({ session, article, comments }) {
     setId(e.currentTarget.id);
   }
 
-  console.log(comments)
+
   return (
     <>
       <div className={cn("heading")}>
         <h1>
           Комментарии<span> {`(${comments?.length})`}</span>
         </h1>
-    
       </div>
 
-      {comments &&
-        comments.map((comment, index) => {
+      {comments?.items &&
+        comments?.items?.map((comment, index) => {
           return (
             <div key={index} className={cn("wrapper")}>
               <div className={cn("title")}>
                 <h4>{comment.author.profile.name}</h4>
-             
+
                 <p>{formatDate(comment.dateCreate)}</p>
               </div>
               <div>
@@ -74,12 +73,12 @@ function Comment({ session, article, comments }) {
                 )}
 
                 {id == comment._id && session.exists && (
-                  <div className={cn("input")}>
+                  <div className={cn("input")} style={{ padding: 0 }}>
                     <h2>Новый ответ</h2>
 
                     <input value={text} type="text" onChange={(e) => setText(e.target.value)} />
                     <div>
-                      <button className={cn("send-btn")}>Отправить</button>
+                      <button className={cn("send-btn")} onClick={(e)=>handleClick(e,comment._id,comment._type)}>Отправить</button>
                       <button>Отмена</button>
                     </div>
                   </div>
@@ -89,13 +88,13 @@ function Comment({ session, article, comments }) {
           );
         })}
 
-      {session.exists && !isClicked &&(
+      {session.exists && !isClicked && (
         <div className={cn("input")}>
           <h2>Новый комментарий</h2>
 
           <input value={text} type="text" onChange={(e) => setText(e.target.value)} />
           <div>
-            <button>Отправить</button>
+            <button onClick={(e)=>handleClick(e,article._id,article._type)}>Отправить</button>
           </div>
         </div>
       )}

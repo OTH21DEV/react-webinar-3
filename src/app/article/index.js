@@ -40,7 +40,7 @@ function Article() {
     (state) => ({
       article: state.article.data,
       waiting: state.article.waiting,
-      comments: state.comments.data.items,
+      comments: state.comments.data,
     }),
     shallowequal
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
