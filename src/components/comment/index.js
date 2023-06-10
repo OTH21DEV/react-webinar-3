@@ -1,29 +1,28 @@
 import { memo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { cn as bem } from "@bem-react/classname";
-
 import "./style.css";
 import { useDispatch, useSelector as useSelectorRedux } from "react-redux";
 import { postComment } from "../../store-redux/comments/actions";
-
 import formatDate from "../../utils/format-date";
 
-
-
-
 function Comment({ session, article, comments }) {
-
   const dispatch = useDispatch();
 
   const [text, setText] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [id, setId] = useState("");
+  let navigate = useNavigate();
+  const params = useParams();
 
   function handleClick(e, id, type) {
     e.preventDefault();
 
+    // navigate(`/articles/${params.id}`);
+    setIsClicked(true);
     dispatch(postComment(text, id, type));
+    //   window.location.reload()
   }
 
   const cn = bem("Comment");
@@ -33,8 +32,11 @@ function Comment({ session, article, comments }) {
     setId(e.currentTarget.id);
   }
 
+function cancel (){
+    setIsClicked(false)
+}
   return (
-    <>
+    <section className={cn("section")}>
       <div className={cn("heading")}>
         <h1>
           Комментарии<span> {`(${comments?.length})`}</span>
@@ -61,21 +63,21 @@ function Comment({ session, article, comments }) {
                   >
                     Ответить
                   </a>
-                  {id == comment._id && !session.exists && (
+                  {isClicked && id == comment._id && !session.exists && (
                     <div>
                       <p className={cn("login")}>
                         <Link to={"/login"} className={cn("write")}>
                           Войдите
                         </Link>
-                        , чтобы иметь возможность комментировать
-                        <a href={`/articles/${article._id}`} className={cn("cancel")}>
+                        , чтобы иметь возможность ответить.
+                        <a className={cn("cancel")} onClick={cancel}>
                           Отмена
                         </a>
                       </p>
                     </div>
                   )}
 
-                  {id == comment._id && session.exists && (
+                  {isClicked && id == comment._id && session.exists && (
                     <div className={cn("input")} style={{ padding: 0 }}>
                       <h2>Новый ответ</h2>
 
@@ -84,7 +86,7 @@ function Comment({ session, article, comments }) {
                         <button className={cn("send-btn")} onClick={(e) => handleClick(e, comment._id, comment._type)}>
                           Отправить
                         </button>
-                        <button>Отмена</button>
+                        <button className={cn("cancel-btn")} onClick={cancel}>Отмена</button>
                       </div>
                     </div>
                   )}
@@ -115,7 +117,7 @@ function Comment({ session, article, comments }) {
           </p>
         </div>
       )}
-    </>
+    </section>
   );
 }
 
