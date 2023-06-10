@@ -21,6 +21,7 @@ import useSelectorStore from "../../hooks/use-selector";
 import { receiveComments } from "../../store-redux/comments/actions";
 import listToTree from "../../utils/list-to-tree";
 import treeToList from "../../utils/tree-to-list";
+import listToTreeComments from "../../utils/list-to-tree-comments";
 
 function Article() {
   const store = useStore();
@@ -57,6 +58,16 @@ function Article() {
     session: state.session,
   }));
 
+  const filtered = listToTreeComments(select.comments?.items);
+  const comments = treeToList(filtered, (item, level) => ({
+    _id: item._id,
+    _type: item._type,
+    level,
+    dateCreate: item.dateCreate,
+    author: item.author.profile.name,
+    text: item.text,
+  }));
+
   return (
     <PageLayout>
       <TopHead />
@@ -67,7 +78,7 @@ function Article() {
       <Spinner active={select.waiting}>
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t} />
       </Spinner>
-      <Comment session={userAuth.session} articleId={params.id} article={select.article} comments={select.comments}></Comment>
+      <Comment session={userAuth.session} articleId={params.id} article={select.article} comments={comments}></Comment>
     </PageLayout>
   );
 }

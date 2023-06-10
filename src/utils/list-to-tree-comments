@@ -1,0 +1,19 @@
+
+export default function listToTreeComments(comments){
+    const root = { _id: null, children: [] };
+    const commentsById = {};
+  
+    comments &&
+      comments?.forEach((comment) => {
+        commentsById[comment._id] = comment;
+        comment.children = [];
+      });
+  
+    comments &&
+      comments?.forEach((comment) => {
+        const parent = commentsById[comment.parent._id] || root;
+        parent.children.push(comment);
+      });
+    return root.children;
+}
+
